@@ -11,6 +11,7 @@ interface ICard {
   category: string;
   location: string;
   time:string;
+  status:String;
 }
 
 export default function Card({
@@ -22,10 +23,11 @@ export default function Card({
   slug,
   category,
   location,
-  time
+  time,
+  status
 }: ICard) {
   return (
-    <div className="grid grid-cols-3 my-20 absolute ">
+    <div className="grid grid-cols-3 mt-[57.5px] ml-[345px] mr-2 p-10 absolute bg-neutral-200  items-end">
 
     <div className="bg-white border w-[350px] border-gray-200 rounded-xl shadow">
       <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
@@ -74,7 +76,7 @@ export default function Card({
         </div>
         <Link
           href={`/ticket/${slug}`}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
+          className='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800' 
         >
           Read more
         </Link>
