@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Sidebar from "./sidebar";
 
 interface ICard {
   title: string;
@@ -11,6 +12,7 @@ interface ICard {
   category: string;
   location: string;
   time:string;
+  status: String;
 }
 
 export default function Card({
@@ -22,12 +24,16 @@ export default function Card({
   slug,
   category,
   location,
-  time
+  time, 
+  status
 }: ICard) {
   return (
-    <div className="grid grid-cols-3 my-20 absolute ">
-
-    <div className="bg-white border w-[350px] border-gray-200 rounded-xl shadow">
+    <div className="flex">
+    <Sidebar/>
+    <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
+    <div className="grid grid-cols-3 grid-rows-3">
+    <Link 
+          href={`/ticket/${slug}`} className="bg-white border w-[300px] border-gray-200 rounded-xl  shadow">
       <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
         <Image
           className="object-fill rounded-t-lg hover:scale-110"
@@ -72,13 +78,20 @@ export default function Card({
             </p>
           </div>
         </div>
-        <Link
-          href={`/ticket/${slug}`}
+        <button
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
         >
-          Read more
-        </Link>
+          Buy Ticket
+        </button>
       </div>
+    </Link>
+    </div>
+    <Link href="/events" className="text-[#387478] my-3">see more events</Link>
+
+    <div className="flex flex-col gap-5 justify-center items-center rounded-xl text-white px-20 py-16 bg-[#387478]/80 mt-10">
+    <h1>Are you hosting a Concert, Seminar or Sports Event? We can help!</h1>
+    <Link href="/vendor" className="bg-neutral-50 py-4 px-10 rounded-xl text-[#387478]"> + Create New Event</Link>
+              </div>
     </div>
     </div>
   );
