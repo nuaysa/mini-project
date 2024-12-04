@@ -2,34 +2,33 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface ICard {
-  title: string;
-  thumbnail: string;
-  avatar: string;
-  price: string;
-  vendor: string;
-  slug: string;
-  category: string;
-  location: string;
-  time:string;
-  status:String;
-}
-
+    title: string;
+    thumbnail: string;
+    avatar: string;
+    price: string;
+    vendor: string;
+    slug: string;
+    category: string;
+    location: string;
+    time:string;
+    status: String;
+  }
 export default function Card({
-  title,
-  thumbnail,
-  avatar,
-  vendor,
-  price,
-  slug,
-  category,
-  location,
-  time,
-  status
-}: ICard) {
-  return (
-    <div className="grid grid-cols-3 mt-[57.5px] ml-[345px] mr-2 p-10 absolute bg-neutral-200  items-end">
-
-    <div className="bg-white border w-[350px] border-gray-200 rounded-xl shadow">
+    title,
+    thumbnail,
+    avatar,
+    vendor,
+    price,
+    slug,
+    category,
+    location,
+    time, 
+    status
+  }: ICard) {
+    return(
+        <div className="bg-white border w-[300px] border-gray-200 rounded-xl shadow">
+            <Link 
+          href={`/ticket/${slug}`}>
       <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
         <Image
           className="object-fill rounded-t-lg hover:scale-110"
@@ -74,14 +73,13 @@ export default function Card({
             </p>
           </div>
         </div>
-        <Link
-          href={`/ticket/${slug}`}
-          className='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800' 
+        <button
+          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
         >
-          Read more
-        </Link>
+          Buy Ticket
+        </button>
       </div>
-    </div>
-    </div>
-  );
+    </Link>
+        </div>
+    )
 }
