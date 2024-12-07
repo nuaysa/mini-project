@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "nama web",
+  title: "EAT | Event and Ticketing",
   description: "Providing event ticketing sercives",
 };
 

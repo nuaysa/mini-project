@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <div className="bg-[#387478] text-white min-h-60 w-[98.9vw] z-20 flex justify-center items-center">
+        <div className="bg-[#387478] text-white min-h-60 min-w-[98.9vw] z-20 flex justify-center items-center">
 <footer className="footer footer-center bg-primary text-primary-content p-10 flex flex-col justify-center gap-5">
   <aside>
     <svg
