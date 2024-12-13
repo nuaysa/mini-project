@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "EAT | Event and Ticketing",
+  title: "ATE | All Ticketing and Events",
   description: "Providing event ticketing sercives",
 };
 

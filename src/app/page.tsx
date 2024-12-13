@@ -3,7 +3,7 @@
 import Carousel from "@/components/carousell";
 import Searchbar from "@/components/searchBar";
 import HomeDis from "@/components/home";
-import Card from "@/components/card";
+
 
 export default function Home() {
   return (
@@ -13,7 +13,6 @@ export default function Home() {
       <Searchbar/>
       <HomeDis/>
 </div>
-      {/* <Card/> */}
       <div>
 
       </div>

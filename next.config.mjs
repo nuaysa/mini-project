@@ -2,7 +2,8 @@
 const nextConfig = {
     images :
     {remotePatterns:[
-        {hostname : "cdn-icons-png.flaticon.com"}
+        {hostname : "cdn-icons-png.flaticon.com"},
+        {hostname : "lh5.googleusercontent.com"},
     ]
 }};
 
