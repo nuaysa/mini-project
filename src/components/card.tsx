@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCalendarAlt, FaMoneyBill } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import CreateNew from "./ClickNewEvent";
 
 interface ICard {
   title: string;
@@ -15,18 +16,18 @@ interface ICard {
     category: string;
     location: string;
     time:Date;
-    organizer: String;
+    organizer: string;
   }
 export default function Card({
-  title,
-  thumbnail,
-  logo,
+    title,
+    thumbnail,
     price,
     slug,
     category,
     location,
     time, 
-    organizer
+    organizer,
+    logo
   }: ICard) {
     return (
    <div className="flex">
@@ -82,8 +83,8 @@ export default function Card({
         </div>
       </div>
     </Link>
+    <div><CreateNew/></div>
     </div>
    </div>
-
-)
+) 
 }

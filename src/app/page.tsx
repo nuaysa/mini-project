@@ -7,7 +7,7 @@ import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDebounce } from "use-debounce";
 
 
@@ -27,12 +27,6 @@ export default function Home() {
       console.log(err);
     } 
   };
-
-  useEffect(() => {
-    getData();
-    // router.push( "list?" );
-    }, [text]);
-  
 
   return (
     <div>

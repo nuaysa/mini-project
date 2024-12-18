@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface categoriesData {
@@ -26,8 +25,7 @@ export default function Sidebar({categories, onCategorySelect}: SidebarProps) {
                         {category.icon}
                         <h1>{category.name}</h1>
                     </button>
-                ))}
-            </div>
+                ))}            </div>
         </div>
     );
 }
