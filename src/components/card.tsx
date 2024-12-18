@@ -1,5 +1,6 @@
 
 import { formatDate } from "@/helpers/dateFormat";
+import { formatPrice } from "@/helpers/priceFormat";
 import Image from "next/image";
 import Link from "next/link";
 import { FaCalendarAlt, FaMoneyBill } from "react-icons/fa";
@@ -16,7 +17,7 @@ interface ICard {
     time:Date;
     organizer: String;
   }
-export default async function Card({
+export default function Card({
   title,
   thumbnail,
   logo,
@@ -27,12 +28,12 @@ export default async function Card({
     time, 
     organizer
   }: ICard) {
-  return (
+    return (
    <div className="flex">
 
     <div className="flex bg-neutral-100 rounded-xl mb-3">
       <Link
-          href={`/ticket/${slug}`} className="bg-white border w-[350px] border-gray-200 rounded-xl  shadow">
+          href={`/ticket/${slug}`} className="bg-white border w-[350px] h-[440px] border-gray-200 rounded-xl  shadow">
       <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
         <Image
           className="object-fill rounded-t-lg hover:scale-110"
@@ -56,7 +57,7 @@ export default async function Card({
         <FaCalendarAlt />  {formatDate(time.toString())} 
         </h5>
         <h5 className="flex gap-2 items-center mb-1 text-sm font-bold line-clamp-2 tracking-tight text-[#387478]">
-        <FaMoneyBill /> {price == 0 ? "Free" : `IDR ${price}`}
+        <FaMoneyBill /> {price == 0 ? "Free" : `${formatPrice(price)}`}
         </h5>
         <div className="flex items-center my-5">
           <div className="w-10 h-10 relative">
@@ -69,11 +70,8 @@ export default async function Card({
               />
           </div>
           <div className="flex-1 min-w-0 ms-4">
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-sm font-extralight text-gray-900 truncate">
               {organizer}
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              {}
             </p>
           </div>
         <button

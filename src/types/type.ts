@@ -8,7 +8,7 @@ export interface IEvents{
     id: number;
     title: string;
     description: string;
-    category: "Entertaiment" | "seminar" | "business" | "food";
+    category: "Entertaiment" | "seminar" | "sport" | "food" | "all";
     location: "Bandung" | "Jakarta" | "Bogor" | "Depok" |"Tangerang" | "Bekasi";
     venue: string;
     mapURl: string;
@@ -19,8 +19,7 @@ export interface IEvents{
     isActive: Boolean;
     slug: string;
     Promotor: IPromotor;
-    Ticket: ITicket
-    
+    ticket: ITicket[]
 }
 
 export interface IPromotor{
@@ -31,13 +30,13 @@ export interface IPromotor{
 }
 
 export interface ITicket {
-    id: number;
-    eventId: number;
-    price: number;
-    category: ""| "";
-    startDate: Date;
-    endDate: Date;
-    isActive: Boolean;
-    discount: Boolean;
-    quota: number;
-}
+        id: number,
+        eventId: number,
+        price: number,
+        category: "VIP"| "Cat1" | "Cat2" | "festivalPass" | "free",
+        startDate: Date,
+        endDate: Date,
+        isActive: Boolean,
+        discount: Boolean,
+        quota: number,
+   }
