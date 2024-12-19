@@ -8,6 +8,9 @@ import { Input } from "@/components/form/input";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { toastErr } from "@/helpers/toast";
+
+const base_url = process.env.BASE_URL_BE;
 
 const LoginSchema = Yup.object().shape({
   data: Yup.string().required("username or email is required"),
@@ -33,7 +36,7 @@ export default function RegisterPage() {
   const handleLogin = async (user: FormValues) => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://localhost:8000/api/auth/login", {
+      const res = await fetch("{base_url}/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,13 +46,13 @@ export default function RegisterPage() {
       });
       const result = await res.json();
       if (!res.ok) throw result;
+      localStorage.setItem("token", result.token);
       setIsAuth(true);
       setUser(result.user);
       router.push("/");
       toast.success(result.message);
-    } catch (err: any) {
-      console.log(err);
-      toast.error(err.message);
+    } catch (err) {
+      toastErr(err);
     } finally {
       setIsLoading(false);
     }

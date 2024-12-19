@@ -1,109 +1,90 @@
+
+import { formatDate } from "@/helpers/dateFormat";
+import { formatPrice } from "@/helpers/priceFormat";
 import Image from "next/image";
 import Link from "next/link";
-import Sidebar from "./sidebar";
+import { FaCalendarAlt, FaMoneyBill } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import CreateNew from "./ClickNewEvent";
 
 interface ICard {
   title: string;
   thumbnail: string;
-  avatar: string;
-  price: string;
-  vendor: string;
-  slug: string;
-  category: string;
-  location: string;
-  time: string;
-  status: String;
-}
-
+  logo: string;
+    price: number;
+    slug: string;
+    category: string;
+    location: string;
+    time:Date;
+    organizer: string;
+  }
 export default function Card({
-  title,
-  thumbnail,
-  avatar,
-  vendor,
-  price,
-  slug,
-  category,
-  location,
-  time,
-  status,
-}: ICard) {
-  return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
-        <div className="grid grid-cols-3 grid-rows-3">
-          <Link
-            href={`/ticket/${slug}`}
-            className="bg-white border w-[300px] border-gray-200 rounded-xl  shadow"
-          >
-            <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
-              <Image
-                className="object-fill rounded-t-lg hover:scale-110"
-                src={``}
-                alt={title}
-                fill
-                priority
-              />
-              <span className=" absolute bg-gray-600 text-white px-2 m-2 right-0 text-xs rounded-sm ">
-                {category}
-              </span>
-            </div>
-            <div className="p-4">
-              <h5 className="mb-2 text-md font-bold line-clamp-2 tracking-tight text-gray-900 dark:text-white">
-                {title}
-              </h5>
-              <h5 className="mb-2 text-md font-bold line-clamp-2 tracking-tight text-[#387478] dark:text-white">
-                {location}
-              </h5>
-              <h5 className="mb-2 text-md font-bold line-clamp-2 tracking-tight text-[#387478] dark:text-white">
-                {time}
-              </h5>
-              <h5 className="mb-2 text-md font-bold line-clamp-2 tracking-tight text-[#387478] dark:text-white">
-                {price}
-              </h5>
-              <div className="flex items-center my-5">
-                <div className="w-10 h-10 relative">
-                  <Image
-                    className="rounded-full object-cover"
-                    src={``}
-                    alt={vendor}
-                    fill
-                    priority
-                  />
-                </div>
-                <div className="flex-1 min-w-0 ms-4">
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                    {vendor}
-                  </p>
-                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {}
-                  </p>
-                </div>
-              </div>
-              <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
-                Buy Ticket
-              </button>
-            </div>
-          </Link>
-        </div>
-        )
-      </div>
-      <Link href="/events" className="text-[#387478] my-3">
-        see more events
-      </Link>
+    title,
+    thumbnail,
+    price,
+    slug,
+    category,
+    location,
+    time, 
+    organizer,
+    logo
+  }: ICard) {
+    return (
+   <div className="flex">
 
-      <div className="flex flex-col gap-5 justify-center items-center rounded-xl text-white px-20 py-16 bg-[#387478]/80 mt-10">
-        <h1>
-          Are you hosting a Concert, Seminar or Sports Event? We can help!
-        </h1>
-        <Link
-          href="/vendor"
-          className="bg-neutral-50 py-4 px-10 rounded-xl text-[#387478]"
-        >
-          {" "}
-          + Create New Event
-        </Link>
+    <div className="flex bg-neutral-100 rounded-xl mb-3">
+      <Link
+          href={`/ticket/${slug}`} className="bg-white border w-[350px] h-[440px] border-gray-200 rounded-xl  shadow">
+      <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
+        <Image
+          className="object-fill rounded-t-lg hover:scale-110"
+          src={thumbnail}
+          alt={title}
+          fill
+          priority
+        />
+        <span className=" absolute bg-[#387478]/80 text-white px-3 m-1 right-0 text-xs rounded-lg ">
+          {category}
+        </span>
       </div>
+      <div className="px-4 pt-2 ">
+        <h5 className="mb-2 text-lg font-bold line-clamp-2 tracking-tight text-gray-900">
+          {title}
+        </h5>
+        <h5 className="flex gap-2 items-center mb-1 text-sm font-bold line-clamp-2 tracking-tight text-[#387478]">
+        <FaLocationDot /> {location} 
+        </h5>
+        <h5 className="flex gap-2 items-center mb-1 text-sm font-bold line-clamp-2 tracking-tight text-[#387478]">
+        <FaCalendarAlt />  {formatDate(time.toString())} 
+        </h5>
+        <h5 className="flex gap-2 items-center mb-1 text-sm font-bold line-clamp-2 tracking-tight text-[#387478]">
+        <FaMoneyBill /> {price == 0 ? "Free" : `${formatPrice(price)}`}
+        </h5>
+        <div className="flex items-center my-5">
+          <div className="w-10 h-10 relative">
+            <Image
+              className="rounded-full border border-[#387478]/80 object-cover"
+              src={logo}
+              alt='organizer'
+              fill
+              priority
+              />
+          </div>
+          <div className="flex-1 min-w-0 ms-4">
+            <p className="text-sm font-extralight text-gray-900 truncate">
+              {organizer}
+            </p>
+          </div>
+        <button
+          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#387478]/90 rounded-lg hover:bg-[#387478] focus:ring-4 focus:outline-none"
+        >
+          Buy Ticket
+        </button>
+        </div>
+      </div>
+    </Link>
+    <div><CreateNew/></div>
     </div>
-  );
+   </div>
+) 
 }

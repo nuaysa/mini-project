@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/footer";
 import { SessionProvider } from "@/context/useSession";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "nama web",
+  title: "ATE | All Ticketing and Events",
   description: "Providing event ticketing sercives",
 };
 
@@ -32,6 +33,13 @@ export default function RootLayout({
       >
         <SessionProvider>
         {children}
+        <ToastContainer
+            draggable
+            closeOnClick
+            autoClose={5000}
+            theme="dark"
+            position="bottom-right"
+          />
         </SessionProvider>
         <Footer/>
       </body>

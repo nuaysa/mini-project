@@ -20,6 +20,8 @@ const SessionContext = createContext<SessionContextProps | undefined>(
   undefined
 );
 
+const base_url = process.env.BASE_URL_BE;
+
 export const SessionProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -28,9 +30,16 @@ export const SessionProvider: React.FC<{ children: ReactNode }> = ({
 
   const checkSession = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/users/profile", {
+      const token = localStorage.getItem("token");
+      if(!token) {
+        console.log("Login first!");
+        return;        
+      }
+      const res = await fetch(`${base_url}/users/profile`, {
         method: "GET",
-        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
       });
       const result = await res.json();
       if (!res.ok) throw result;
