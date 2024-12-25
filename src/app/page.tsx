@@ -7,10 +7,11 @@ import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 
 
+const base_url = process.env.BASE_URL_BE
 export default function Home() {
   const [events, setEvents] = useState<IEvents[]>([]);
   const router = useRouter();
@@ -20,13 +21,16 @@ export default function Home() {
  
   const getData = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/api/events`);
+      const res = await fetch(`https://ate-backend.vercel.app/api/events`);
       const result = await res.json();
       setEvents(result.events);
     } catch (err) {
       console.log(err);
     } 
   };
+  useEffect(() => {
+    getData();
+  })
 
   return (
     <div>
