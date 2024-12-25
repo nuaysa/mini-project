@@ -55,3 +55,4 @@ export interface EventInput {
     type: "Paid" | "Free";
     thumbnail: File | string | null;
   }
+

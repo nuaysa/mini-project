@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function Tickets({ params }: { params: { slug: string } }) {
   const event: IEvents = await getEventSlug(params.slug);
   const data: IEvents[] = await getEvents();
-  
   return (
     <div className="flex flex-col justify-center">
       <div className="relative min-h-[80vh] py-20 bg-[#387478]/80 max-w-screen"></div>

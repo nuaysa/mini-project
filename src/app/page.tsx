@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 
+
 const base_url = process.env.BASE_URL_BE
 export default function Home() {
   const [events, setEvents] = useState<IEvents[]>([]);
@@ -27,7 +28,6 @@ export default function Home() {
       console.log(err);
     } 
   };
-
   useEffect(() => {
     getData();
   })
