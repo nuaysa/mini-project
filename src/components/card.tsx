@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCalendarAlt, FaMoneyBill } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import CreateNew from "./ClickNewEvent";
 
 interface ICard {
   title: string;
@@ -35,7 +34,7 @@ export default function Card({
     <div className="flex bg-neutral-100 rounded-xl mb-3">
       <Link
           href={`/ticket/${slug}`} className="bg-white border w-[350px] h-[440px] border-gray-200 rounded-xl  shadow">
-      <div className="rounded-t-xl h-[200px] relative overflow-hidden shadow">
+      <div className="rounded-t-xl h-[240px] relative overflow-hidden shadow">
         <Image
           className="object-fill rounded-t-lg hover:scale-110"
           src={thumbnail}
@@ -47,7 +46,7 @@ export default function Card({
           {category}
         </span>
       </div>
-      <div className="px-4 pt-2 ">
+      <div className="px-4 pt-2">
         <h5 className="mb-2 text-lg font-bold line-clamp-2 tracking-tight text-gray-900">
           {title}
         </h5>
@@ -83,7 +82,6 @@ export default function Card({
         </div>
       </div>
     </Link>
-    <div><CreateNew/></div>
     </div>
    </div>
 ) 

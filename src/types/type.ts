@@ -8,7 +8,7 @@ export interface IEvents{
     id: number;
     title: string;
     description: string;
-    category: "Entertaiment" | "seminar" | "sport" | "food" | "all";
+    category: "Entertainment" | "seminar" | "sport" | "food" | "all";
     location: "Bandung" | "Jakarta" | "Bogor" | "Depok" |"Tangerang" | "Bekasi";
     venue: string;
     mapURl: string;
@@ -40,3 +40,18 @@ export interface ITicket {
         discount: Boolean,
         quota: number,
    }
+
+   
+export interface EventInput {
+    title: string;
+    description: string;
+    slug: string;
+    category: "Entertainment" | "seminar" | "sport" | "food" | "all";
+    date: Date;
+    time: string;
+    location: "Bandung" | "Jakarta" | "Bogor" | "Depok" |"Tangerang" | "Bekasi";
+    venue: string;
+    mapURL: string;
+    type: "Paid" | "Free";
+    thumbnail: File | string | null;
+  }
