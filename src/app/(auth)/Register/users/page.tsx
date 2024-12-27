@@ -7,12 +7,13 @@ import { Form, Formik, FormikProps } from "formik";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { toastErr } from "@/helpers/toast";
+import { useRouter } from "next/navigation";
 
 // const base_url = process.env.BASE_URL_BE;
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
-  email: Yup.string() // Perbaiki nama properti menjadi email
+  email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
   password: Yup.string()
@@ -21,7 +22,7 @@ const RegisterSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Password does not match!")
     .required("Confirm password is required"),
-    reffered_by: Yup.string()
+  reffered_by: Yup.string()
     .optional()
     .matches(
       /^[a-zA-Z0-9]{6}$/,
@@ -39,6 +40,7 @@ interface FormValues {
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
   const initialValue: FormValues = {
     username: "",
     email: "",
@@ -50,7 +52,7 @@ export default function SignUpPage() {
   const handleAdd = async (user: FormValues) => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://localhost:8000/api/auth/", {
+      const res = await fetch("http://localhost:8000/api/auth/registerUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,6 +62,7 @@ export default function SignUpPage() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Something went wrong ");
       toast.success("Register Success");
+      router.push("/");
     } catch (err) {
       toastErr(err);
     } finally {
@@ -94,7 +97,12 @@ export default function SignUpPage() {
             return (
               <Form className="flex flex-col gap-5">
                 <Input formik={props} name="username" label="Username*" />
-                <Input formik={props} name="email" label="Email*" type="email" />
+                <Input
+                  formik={props}
+                  name="email"
+                  label="Email*"
+                  type="email"
+                />
                 <Input
                   formik={props}
                   name="password"
@@ -107,11 +115,15 @@ export default function SignUpPage() {
                   label="Confirm Password*"
                   type="password"
                 />
-                <Input formik={props} name="reffered_by" label="Referral Code (optional)" />
+                <Input
+                  formik={props}
+                  name="reffered_by"
+                  label="Referral Code (optional)"
+                />
 
                 <button
                   type="submit"
-                  disabled={isLoading} // Button disabled saat loading
+                  disabled={isLoading}
                   className={`w-full py-2 text-white rounded-md font-medium ${
                     isLoading
                       ? "bg-[#94b6b3] cursor-not-allowed"
