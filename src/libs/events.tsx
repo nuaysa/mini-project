@@ -1,7 +1,7 @@
 
 
 export const getEvents = async() => {
-    const res = await fetch(`${process.env.BASE_URL_BE}/events`
+    const res = await fetch(`https://ate-backend.vercel.app/api/events`
     ,{next: {revalidate:0}}
     )
     const data = await res.json()
@@ -10,7 +10,7 @@ export const getEvents = async() => {
 }
 
     export const getEventSlug = async(slug: string) => {
-        const res = await fetch (`${process.env.BASE_URL_BE}/events/${slug}`
+        const res = await fetch (`https://ate-backend.vercel.app/api/events/${slug}`
         ,{next: {revalidate:0}}
         )
         const data = await res.json()

@@ -55,3 +55,12 @@ export interface EventInput {
     type: "Paid" | "Free";
     thumbnail: File | string | null;
   }
+
+  export interface TicketInput {
+    price: number;
+    category: "VIP"| "Cat1" | "Cat2" | "festivalPass" | "free" ;
+    startDate: Date;
+    endDate: Date;
+    quota: number;
+    discount: Boolean;
+  }

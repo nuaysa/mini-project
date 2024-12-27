@@ -13,10 +13,11 @@ export default function Description({
   price,
   category,
   quota,
-  slug
+  slug,
 }: IDetails) {
   const router = useRouter()
   const [isDisable, setIsDisable] = useState<boolean> (false)
+
   useEffect(() => {
     if (quota === 0) {
       setIsDisable(true);

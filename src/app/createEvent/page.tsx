@@ -27,57 +27,60 @@ const initialValues: EventInput = {
 
 function EventCreatePage() {
   const [isLoading, setIsLoading] = useState(false);
-  // const router = useRouter();/
-  // const onCreate = async (data: EventInput) => {
-  //   try {
-  //     setIsLoading(true);
-  //     const formData = new FormData();
-  //     for (const key in data) {
-  //       const item = data[key as keyof EventInput];
-  //       if (item) {
-  //         // formData.append(key, item);
-  //       }
-  //     }
-  //     const res = await fetch(`${base_url}/events`, {
-  //       method: "POST",
-  //       body: formData,
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  // //     });
-  //     const result = await res.json();
-  //     if (!res.ok) throw result;
+  const router = useRouter();
+  const onCreate = async (data: EventInput) => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      for (const key in data) {
+        const item = data[key as keyof EventInput];
+        if (item) {
+          // formData.append(key, item);
+        }
+      }
+      const res = await fetch(`https://ate-backend.vercel.app/api/events`, {
+        method: "POST",
+        body: formData,
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+      });
+      const result = await res.json();
+      if (!res.ok) throw result;
   // revalidate("events");
-  //     toast.success(result.message);
-  //     router.push("/");
-  //   } catch (err) {
-  //     console.error(err);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+      toast.success(result.message);
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
-    <div className="container mx-20 my-20">
+
+    <div className="flex justify-center items-center">
+
+    <div className="container mx-20 my-20 w-[900px] bg-neutral-100 shadow-md px-20 py-10 rounded-xl">
       <Formik
         initialValues={initialValues}
         validationSchema={eventSchema}
         onSubmit={(values, actions) => {
-          // onCreate(values);
+          onCreate(values);
           actions.resetForm();
         }}
       >
         {(props) => {
           return (
-            <Form className="flex flex-col gap-3 ">
+            <Form className="flex flex-col gap-3 justify-center">
               <div>
-                <label htmlFor="thumbnail" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="thumbnail" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Thumbnail
                 </label>
                 <FieldThumbnail name="thumbnail" formik={props} />
                 <ErrorMessage name="thumbnail" component="span" className="text-sm text-red-500" />
               </div>
               <div>
-                <label htmlFor="title" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="title" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Title
                 </label>
                 <Field
@@ -93,14 +96,14 @@ function EventCreatePage() {
                 <ErrorMessage name="title" component="span" className="text-sm text-red-500" />
               </div>
               <div>
-                <label htmlFor="slug" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="slug" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Slug
                 </label>
                 <input type="text" name="slug" value={props.values.slug} readOnly disabled className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2" />
               </div>
 
               <div>
-                <label htmlFor="category" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="category" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Category
                 </label>
                 <Field name="category" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
@@ -113,7 +116,7 @@ function EventCreatePage() {
                 <ErrorMessage name="category" component="span" className="text-sm text-red-500" />
               </div>
               <div>
-                <label htmlFor="Ticket Type" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="Ticket Type" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Ticket Type
                 </label>
                 <Field name="Ticket Type" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
@@ -127,7 +130,7 @@ function EventCreatePage() {
               <div className="flex gap-10">
                 <span className="flex flex-col">
 
-                <label htmlFor="Date" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="Date" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Date
                 </label>
                 <Field
@@ -143,7 +146,7 @@ function EventCreatePage() {
                   </span>
 
                 <span className="flex flex-col">
-                <label htmlFor="Time" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="Time" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Time
                 </label>
                 
@@ -164,7 +167,7 @@ function EventCreatePage() {
                 <span className="flex flex-col">
 
                
-                <label htmlFor="Location" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="Location" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Location
                 </label>
                 <Field name="Location" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
@@ -182,7 +185,7 @@ function EventCreatePage() {
                   </span>
 
                 <span className="flex flex-col">
-                <label htmlFor="Venue" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="Venue" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Venue
                 </label>
                 
@@ -199,7 +202,7 @@ function EventCreatePage() {
                   </span>
               </div>
               <div>
-                <label htmlFor="MapURL" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="MapURL" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Map URL
                 </label>
                 <Field
@@ -215,15 +218,16 @@ function EventCreatePage() {
               </div>
 
               <div>
-                <label htmlFor="content" className="block mb-2 text-sm max-w-[1000px] font-medium text-gray-900">
+                <label htmlFor="content" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Description
                 </label>
                 <RichTextEditor setFieldValue={props.setFieldValue} />
                 <ErrorMessage name="content" component="span" className="text-sm text-red-500" />
               </div>
-              <div className="flex sm:justify-end">
-                <button type="submit" disabled={isLoading} className=" h-[40px] disabled:cursor-not-allowed disabled:bg-[#8a8a8b] sm:w-[120px] text-[#f5f5f7] bg-[#387874] hover:bg-[#387872] rounded-lg">
-                  {isLoading ? "Loading..." : "Save"}
+              <div className="flex sm:justify-end mt-3">
+                <button 
+                onClick = {(e) => router.push("/createEvent/createTicket")} type="submit" disabled={isLoading} className=" h-[40px] disabled:cursor-not-allowed disabled:bg-[#8a8a8b] sm:w-[120px] text-[#f5f5f7] bg-[#387874] hover:bg-[#387872]/60 focus:ring-1 rounded-lg">
+                  {isLoading ? "Loading..." : "Continue"}
                 </button>
               </div>
             </Form>
@@ -231,6 +235,7 @@ function EventCreatePage() {
         }}
       </Formik>
     </div>
+  </div>
   );
 }
 

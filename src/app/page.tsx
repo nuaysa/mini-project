@@ -32,6 +32,7 @@ export default function Home() {
     getData();
   })
 
+
   return (
     <div>
       <div className=" h-full static flex flex-col">
@@ -40,7 +41,7 @@ export default function Home() {
         <div className="sm:hiden flex">
           {/* <Sidebar /> */}
           <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
-            <div className="grid grid-cols-1 lg:grid-cols-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 px-5">
               {events.map((item, idx) => {
                 return (
                   <Card
