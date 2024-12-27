@@ -5,22 +5,22 @@ import { useState } from "react";
 import { useSession } from "@/context/useSession";
 import { Form, Formik, FormikProps } from "formik";
 import { Input } from "@/components/form/input";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { toastErr } from "@/helpers/toast";
+import { useRouter } from "next/navigation";
 
-const base_url = process.env.BASE_URL_BE;
+// const base_url = process.env.BASE_URL_BE;
 
 const LoginSchema = Yup.object().shape({
-  data: Yup.string().required("username or email is required"),
+  username: Yup.string().required("username or email is required"),
   password: Yup.string()
     .min(3, "password must be 3 characters at minimum")
     .required("password is required"),
 });
 
 interface FormValues {
-  data: string;
+  username: string;
   password: string;
 }
 
@@ -29,14 +29,14 @@ export default function RegisterPage() {
   const { setIsAuth, setUser } = useSession();
   const router = useRouter();
   const initialValue: FormValues = {
-    data: "",
+    username: "",
     password: "",
   };
 
   const handleLogin = async (user: FormValues) => {
     try {
       setIsLoading(true);
-      const res = await fetch("{base_url}/auth/login", {
+      const res = await fetch("http://localhost:8000/api/auth/loginUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export default function RegisterPage() {
               <Form className="flex flex-col gap-5">
                 <Input
                   formik={props}
-                  name="data"
+                  name="username"
                   label="Username Or Email :"
                   placeholder="username or email"
                 />
