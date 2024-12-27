@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -15,7 +16,6 @@ export default function Searchbar({value, onChange,}: searchbarProps) {
     const handleSearch = () => {
         router.push(`/list?keyword=${value}`);
       };
-    
     return (
         <div className="searchbar flex justify-center py-2 px-10 bg-[#387478] sticky top-0 z-50">
             <input 

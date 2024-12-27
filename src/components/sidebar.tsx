@@ -26,6 +26,7 @@ export default function Sidebar({categories, onCategorySelect}: SidebarProps) {
                         <h1>{category.name}</h1>
                     </button>
                 ))}            </div>
+
         </div>
     );
 }

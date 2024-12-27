@@ -35,6 +35,7 @@ export default function Card({
       <Link
           href={`/ticket/${slug}`} className="bg-white border w-[350px] h-[440px] border-gray-200 rounded-xl  shadow">
       <div className="rounded-t-xl h-[240px] relative overflow-hidden shadow">
+
         <Image
           className="object-fill rounded-t-lg hover:scale-110"
           src={thumbnail}

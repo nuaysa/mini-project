@@ -61,11 +61,14 @@ function EventCreatePage() {
     <div className="flex justify-center items-center">
 
     <div className="container mx-20 my-20 w-[900px] bg-neutral-100 shadow-md px-20 py-10 rounded-xl">
+
       <Formik
         initialValues={initialValues}
         validationSchema={eventSchema}
         onSubmit={(values, actions) => {
+
           onCreate(values);
+
           actions.resetForm();
         }}
       >
@@ -81,6 +84,7 @@ function EventCreatePage() {
               </div>
               <div>
                 <label htmlFor="title" className="block mb-2 text-sm w-max font-medium text-gray-900">
+
                   Title
                 </label>
                 <Field
@@ -97,6 +101,7 @@ function EventCreatePage() {
               </div>
               <div>
                 <label htmlFor="slug" className="block mb-2 text-sm w-max font-medium text-gray-900">
+
                   Slug
                 </label>
                 <input type="text" name="slug" value={props.values.slug} readOnly disabled className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2" />
@@ -104,6 +109,7 @@ function EventCreatePage() {
 
               <div>
                 <label htmlFor="category" className="block mb-2 text-sm w-max font-medium text-gray-900">
+
                   Category
                 </label>
                 <Field name="category" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
@@ -117,6 +123,7 @@ function EventCreatePage() {
               </div>
               <div>
                 <label htmlFor="Ticket Type" className="block mb-2 text-sm w-max font-medium text-gray-900">
+
                   Ticket Type
                 </label>
                 <Field name="Ticket Type" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
@@ -129,7 +136,6 @@ function EventCreatePage() {
 
               <div className="flex gap-10">
                 <span className="flex flex-col">
-
                 <label htmlFor="Date" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Date
                 </label>
@@ -167,8 +173,9 @@ function EventCreatePage() {
                 <span className="flex flex-col">
 
                
+
                 <label htmlFor="Location" className="block mb-2 text-sm w-max font-medium text-gray-900">
-                  Location
+
                 </label>
                 <Field name="Location" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
                   <option value="">~ Location ~</option>

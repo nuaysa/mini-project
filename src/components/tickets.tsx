@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
 interface IDetails {
   price: string;
   category: "VIP" | "Cat1" | "Cat2" | "festivalPass" | "free";
@@ -26,9 +25,7 @@ export default function Description({
 
   return (
     <div className="flex flex-col">
-     
 
-   
         <div className="bg-[#387874]/90 px-3 py-2 rounded-t-xl text-white font-bold text-lg "> {category}</div>
       <div className="bg-neutral-200 px-8 py-4 rounded-b-xl gap-5 flex flex-col justify-center mb-10">
       <div className="flex justify-between">

@@ -26,8 +26,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function Tickets({ params }: { params: { slug: string } }) {
-  const event: IEvents = await getEventSlug(params.slug);
-  console.log(event.Promotor.avatar)
+  const event: IEvents = await getEventSlug(params.slug);console.log(event.Promotor.avatar)
   
   return (
     <div className="flex flex-col justify-center">
@@ -78,6 +77,7 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
               <h1 className="text-[#387874] font-semibold text-2xl mt-20">Location : </h1>
                 <div className="bg-neutral-400 rounded-xl my-5">
                   <iframe src={event.mapURl} width={500} height={450} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+
                 </div>
             </div>
           </div>

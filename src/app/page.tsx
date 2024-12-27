@@ -27,7 +27,6 @@ export default function Home() {
       console.log(err);
     } 
   };
-
   useEffect(() => {
     getData();
   })
@@ -40,7 +39,7 @@ export default function Home() {
         <Searchbar value={value} onChange={(e) => setValue(e.target.value)} />
         <div className="sm:hiden flex">
           {/* <Sidebar /> */}
-          <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
+          <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 px-5">
               {events.map((item, idx) => {
                 return (
