@@ -1,4 +1,5 @@
-import { useRouter } from "next/router";
+"use client"
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { toastErr } from "@/helpers/toast";
 import { useEffect } from "react";

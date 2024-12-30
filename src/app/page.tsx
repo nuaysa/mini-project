@@ -3,20 +3,16 @@ import Card from "@/components/card";
 import Carousel from "@/components/carousell";
 import CreateNew from "@/components/ClickNewEvent";
 import Searchbar from "@/components/searchBar";
-import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 
-const base_url = process.env.BASE_URL_BE
 export default function Home() {
   const [events, setEvents] = useState<IEvents[]>([]);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [value, setValue] = useState<string>(searchParams.get("keyword") || "");
-  const [text] = useDebounce(value, 500);
  
   const getData = async () => {
     try {
@@ -36,7 +32,7 @@ export default function Home() {
     <div>
       <div className=" h-full static flex flex-col">
         <Carousel />
-        <Searchbar value={value} onChange={(e) => setValue(e.target.value)} />
+        <Searchbar value={value} onChange={(e) => setValue(e.target.value)}/>
         <div className="sm:hiden flex">
           {/* <Sidebar /> */}
           <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full">

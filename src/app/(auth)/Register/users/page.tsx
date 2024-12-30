@@ -71,13 +71,13 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-max py-10 bg-gray-100 ">
       <div className="bg-white shadow-lg rounded-lg p-10 w-full max-w-md">
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-950">Sign Up</h1>
           <p className="text-gray-500">
             Already have an account?{" "}
-            <Link href={"/Login"} className="text-[#387478] font-bold">
+            <Link href={"/Login/users"} className="text-[#387478] font-bold">
               Sign In
             </Link>
           </p>
@@ -111,13 +111,13 @@ export default function SignUpPage() {
                 />
                 <Input
                   formik={props}
-                  name="confirmPassword"
+                  name="confirm Password"
                   label="Confirm Password*"
                   type="password"
                 />
                 <Input
                   formik={props}
-                  name="reffered_by"
+                  name="referral code"
                   label="Referral Code (optional)"
                 />
 
