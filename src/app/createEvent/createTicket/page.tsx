@@ -134,12 +134,10 @@ export default function createTicket() {
 
           <div className="flex gap-10">
             <span className="flex flex-col">
-
-           
             <label htmlFor="quota" className="block mb-2 text-sm w-max font-medium text-gray-900">
               Quota
             </label>
-            <Field name="quota" as="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
+            <Field name="quota" type="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
             
               </Field>
             <ErrorMessage name="quota" component="span" className="text-sm text-red-500" />
@@ -152,7 +150,7 @@ export default function createTicket() {
             
             <Field
               name="discount"
-              type="checkbox"
+              type="radio"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
