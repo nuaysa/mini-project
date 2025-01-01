@@ -50,37 +50,33 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     calculateDiscount();
   }, [points, voucher]);
 
-   function handleTransaction2(){
-    try{
-      console.log("tes");
-    }catch(err){
-      console.log(err);
-    }
-  }
 
-  // const handleTransaction = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const res = await fetch(`http://localhost:8000/api/transaction/1`, {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         "basePrice": 250000,
-  //         "qty": 1,
+  const handleTransaction = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`http://localhost:8000/api/transaction/${params.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "basePrice": ticket?.price!,
+          "qty": 1,
           // "userVoucher": `${voucher? voucher : null}`,
           // "userPoints": `${points ? points : null}`,
-  //       }),
-  //     })
-  //     const result = await res.json();
-  //     if (!res.ok) throw result;
-  //     router.push(result.data.redirect_url)
-  //     toast.success("Transaction Successful");
-  //   } catch (error) {
-  //     console.log(error, "tes");
-  //     toast.error("Transaction Failed 1");
-  //   }finally{
-  //     setLoading(false);
-  //   }
-  // };
+        }),
+      })
+      const result = await res.json();
+      if (!res.ok) throw result;
+      router.push(result.data.redirect_url)
+      toast.success("Transaction Successful");
+    } catch (error) {
+      console.log(error, "tes");
+      toast.error("Transaction Failed");
+    }finally{
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getEvent(params.slug);
@@ -182,10 +178,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         
         <br />
         <div className="flex justify-center">
-        <button onClick={handleTransaction2} type="submit" className="bg-[#387874] text-white rounded-lg p-2 mt-4">
-          Submit
-        </button>
-          {/* <Compmodal handleTransaction={handleTransaction()} /> */}
+          <Compmodal handleTransaction={handleTransaction} />
         </div>
       </div>
     </div>

@@ -5,9 +5,9 @@ import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 interface ICompmodal {
-//   handleTransaction: () => void;
+  handleTransaction: () => void;
 }
-export default function Compmodal({  }: ICompmodal) {
+export default function Compmodal({ handleTransaction }: ICompmodal) {
     const [openModal, setOpenModal] = useState(true);
 
     return(
