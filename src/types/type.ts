@@ -11,7 +11,7 @@ export interface IEvents{
     category: "Entertainment" | "seminar" | "sport" | "food" | "all";
     location: "Bandung" | "Jakarta" | "Bogor" | "Depok" |"Tangerang" | "Bekasi";
     venue: string;
-    mapURl: string;
+    maps: string;
     date: Date;
     time: Date;
     type: "Paid" | "Free";
@@ -64,3 +64,21 @@ export interface EventInput {
     quota: number;
     discount: Boolean;
   }
+
+  export interface ITransaction {
+    id: number,
+    basePrice: number,
+    totalPrice: number,
+    finalPrice: number,
+    status: "pending" | "paid" | "canceled",
+    user: IUser,
+    ticket: ITicket,
+    createdAt: Date,
+    expiresAt: Date,
+    qty: number,
+    promoQuota: number,
+    redirect_url: string,
+    userVoucher: number,
+    userPoints: number,
+    discount: number,
+}

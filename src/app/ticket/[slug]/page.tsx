@@ -33,7 +33,7 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
       <div className="relative min-h-[80vh] py-20 bg-[#387478]/80 max-w-screen"></div>
       <div className="relative min-h-[180vh] py-20 bg-neutral-200 min-w-screen"></div>
       {/* {data.map((item, idx: any) => { */}
-        return (
+        {/* return ( */}
           <div className="flex absolute z-30 left-20 my-40 w-[90vw] h-max bg-white rounded-xl py-7 px-10">
             <div className="flex flex-col gap-5 w-2/3">
               <h1 className="text-3xl font-semibold text-neutral-700">{event.title}</h1>
@@ -44,9 +44,9 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
                 
                 <h1 className="text-[#387874] font-semibold text-2xl mb-8">Ticket : </h1>
                 {
-                new Date(event.date).getTime() < new Date().getTime() ? (
+                new Date(event.date).getTime() > new Date().getTime() ? (
                   event.ticket.map((ticket, ticketIdx) => (
-                  <Description key={ticketIdx} slug={event.slug} price={ticket.price == 0 ? "Free" : formatPrice(ticket.price)} category={ticket.category} quota={ticket.quota} />
+                  <Description key={ticketIdx} slug={event.slug} price={ticket.price == 0 ? "Free" : formatPrice(ticket.price)} category={ticket.category} quota={ticket.quota} id={ticket.id} />
                  ))) :  (<div className="text-red-500 text-2xl">No Ticket Available</div>)
                 }
               
@@ -76,12 +76,12 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
               </div>
               <h1 className="text-[#387874] font-semibold text-2xl mt-20">Location : </h1>
                 <div className="bg-neutral-400 rounded-xl my-5">
-                  <iframe src={event.mapURl} width={500} height={450} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+                  <iframe src={event.maps} width={500} height={450} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="overflow-hidden"/>
 
                 </div>
             </div>
           </div>
-        );
+        ;
       {/* })} */}
     </div>
   );

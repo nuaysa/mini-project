@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import { SessionProvider } from "@/context/useSession";
 import { ToastContainer } from "react-toastify";
+import { Compnavbar } from "@/components/navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
+          <Compnavbar/>
         {children}
         <ToastContainer
             draggable

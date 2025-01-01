@@ -65,7 +65,7 @@ export default function RegisterPage() {
           <h1 className="text-3xl font-bold text-gray-950">Sign In</h1>
           <p className="text-gray-500">
             Don't have an account?{" "}
-            <Link href={"/Register"} className="text-[#387478] font-bold">
+            <Link href={"/Register/users"} className="text-[#387478] font-bold">
               Sign Up
             </Link>
           </p>
