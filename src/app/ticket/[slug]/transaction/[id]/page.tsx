@@ -24,12 +24,12 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   const [ticket, setTicket] = useState<ITicket>();
   const [loading, setLoading] = useState(false);
   const [discount, setDiscount] = useState<number>(0);
-  const [voucher, setVoucher] = useState<string | null>(null);
+  const [voucher, setVoucher] = useState<number | null>(null);
   const [points, setPoints] = useState<number | null>(null);
 
   const formik = useFormik({
     initialValues: {
-      voucher: "",
+      voucher: 0,
       points: 0,
     },
     validationSchema,
@@ -50,7 +50,6 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     calculateDiscount();
   }, [points, voucher]);
 
-
   const handleTransaction = async () => {
     try {
       setLoading(true);
@@ -62,8 +61,8 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         body: JSON.stringify({
           "basePrice": ticket?.price!,
           "qty": 1,
-          // "userVoucher": `${voucher? voucher : null}`,
-          // "userPoints": `${points ? points : null}`,
+          "userVoucher": voucher? voucher : null,
+          "userPoints": points ? points : null,
         }),
       })
       const result = await res.json();
@@ -71,7 +70,6 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
       router.push(result.data.redirect_url)
       toast.success("Transaction Successful");
     } catch (error) {
-      console.log(error, "tes");
       toast.error("Transaction Failed");
     }finally{
       setLoading(false);
@@ -93,7 +91,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
 
   return (
     <div className="bg-white min-h-screen h-[1100px] flex justify-center items-center">
-      <div className="bg-neutral-200 h-max max-w-[900px] min-w-[600px] absolute flex flex-col justify-center rounded-xl p-10">
+      <div className="bg-neutral-200 h-max max-w-[900px] min-w-[400px] absolute flex flex-col justify-center rounded-xl p-10">
         <h1 className="text-[#387874] text-2xl font-bold">Event: </h1>
         <h1 className="font-semibold text-xl mb-2">
           {event?.title!} || {event?.location!}
@@ -136,7 +134,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4 bg-neutral-100 rounded-lg p-4 mt-4">
         <div className="flex justify-between items-center">
           <label htmlFor="points" className="text-md">
-            Points Id:
+            Points:
           </label>
           <input
             type="number"
@@ -153,16 +151,16 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         </div>
         <div className="flex justify-between items-center">
           <label htmlFor="voucher" className="text-md">
-            Voucher Id:
+            Voucher:
           </label>
           <input
-            type="text"
+            type="radio"
             id="voucher"
             name="voucher"
             value={formik.values.voucher}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className="border rounded-lg w-1/2 p-2"
+            className="border rounded-lg p-2"
           />
           {formik.touched.voucher && formik.errors.voucher ? (
             <div className="text-red-500 text-sm">{formik.errors.voucher}</div>

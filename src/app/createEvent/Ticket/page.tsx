@@ -20,7 +20,8 @@ const initialValues: TicketInput = {
 export default function createTicket() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-   const onCreate = async (data: TicketInput) => {
+  const token = localStorage.getItem("token");
+  const onCreate = async (data: TicketInput) => {
       try {
         setIsLoading(true);
         const formData = new FormData();
@@ -34,7 +35,7 @@ export default function createTicket() {
           method: "POST",
           body: formData,
           headers: {
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         const result = await res.json();

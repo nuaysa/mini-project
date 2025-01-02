@@ -82,3 +82,8 @@ export interface EventInput {
     userPoints: number,
     discount: number,
 }
+
+export interface ReviewInput{
+    desc: string;
+    rating: "bad" | "notBad" | "good" | "fantastic";
+}

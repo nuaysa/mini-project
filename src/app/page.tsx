@@ -2,6 +2,7 @@
 import Card from "@/components/card";
 import Carousel from "@/components/carousell";
 import CreateNew from "@/components/ClickNewEvent";
+import { CompPagination } from "@/components/pagination";
 import Searchbar from "@/components/searchBar";
 import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
@@ -21,7 +22,7 @@ export default function Home() {
   const getData = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:8000/api/events`);
+      const res = await fetch(`http://localhost:8000/api/events?isActive=true`);
       const result = await res.json();
       setEvents(result.events);
     } catch (err) {
@@ -66,7 +67,6 @@ export default function Home() {
                 })}
             </div>
               }
-            
             <Link href="/list" className="text-[#387478] my-3">
               see more events
             </Link>
