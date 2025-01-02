@@ -33,9 +33,9 @@ export default function createTicket() {
         const res = await fetch(`https://ate-backend.vercel.app/api/events/ticket`, {
           method: "POST",
           body: formData,
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
+          headers: {
+            // Authorization: `Bearer ${token}`,
+          },
         });
         const result = await res.json();
         if (!res.ok) throw result;
@@ -152,7 +152,6 @@ export default function createTicket() {
               name="discount"
               type="radio"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
-              disabled={props.values.category == "free" ? true : false}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
                 props.setFieldValue("discount", value);

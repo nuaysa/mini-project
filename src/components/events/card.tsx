@@ -29,11 +29,11 @@ export default function Card({
     logo
   }: ICard) {
     return (
-   <div className="flex">
+   <div className="flex justify-center">
 
-    <div className="flex bg-neutral-100 rounded-xl mb-3">
+    <div className="flex bg-neutral-100 justify-center rounded-xl pt-10 mt-3">
       <Link
-          href={`/ticket/${slug}`} className="bg-white border w-[350px] h-[440px] border-gray-200 rounded-xl  shadow">
+          href={`/ticket/${slug}`} className="bg-white border w-[350px] h-[440px] mt-2 border-gray-200 rounded-xl shadow">
       <div className="rounded-t-xl h-[240px] relative overflow-hidden shadow">
 
         <Image

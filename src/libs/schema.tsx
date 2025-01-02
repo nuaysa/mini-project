@@ -55,3 +55,11 @@ export const eventSchema = Yup.object({
   ),
 })
 
+export const ticketSchema = Yup.object().shape({
+  price: Yup.number().required("Price is Required").min(0, "can't have a minus price"),
+  quota: Yup.number().required("Quota is Required").min(20, "minimum quota= 20"),
+  category: Yup.string().required("Please select a category"),
+  startDate: Yup.date().required("Start Date is Required"),
+  endDate: Yup.date().required("End Date is Required"),
+  discount: Yup.boolean() 
+})

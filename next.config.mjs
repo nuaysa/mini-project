@@ -6,6 +6,7 @@ const nextConfig = {
         {hostname : "lh5.googleusercontent.com"},
         {hostname : "akcdn.detik.net.id"},
         {hostname : "res.cloudinary.com"},
+        {hostname : "c8.alamy.com"},
     ]
 }};
 

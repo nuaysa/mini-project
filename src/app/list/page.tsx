@@ -1,5 +1,5 @@
 "use client";
-import CreateNew from "@/components/ClickNewEvent";
+import Card from "@/components/card";
 import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -10,7 +10,9 @@ import Pagination from "@/components/pagination";
 import Searchbar from "@/components/searchBar";
 import { MdOutlineSportsBasketball } from "react-icons/md";
 import { PiBowlFoodBold, PiProjectorScreenBold } from "react-icons/pi";
-import { TbMovie } from "react-icons/tb"
+import { TbMovie } from "react-icons/tb";
+import CreateNew from "@/components/ClickNewEvent";
+
 const categories = [ 
   { id: 1, name: 'sport', icon: <MdOutlineSportsBasketball className="text-3xl" /> },
   { id: 2, name: 'seminar', icon: <PiProjectorScreenBold className="text-3xl" /> },
@@ -18,6 +20,7 @@ const categories = [
   { id: 4, name: 'food', icon: <PiBowlFoodBold className="text-3xl" /> },
 ]
 
+const base_url = process.env.BASE_URL_BE;
 export default function List() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1)
@@ -42,7 +45,7 @@ export default function List() {
       setIsloading(true);
       console.log("Fetching data for category:", category);
 
-      const res = await fetch(`https://ate-backend.vercel.app/api/events?search=${text}&page=${currentPage}&category=${category}`);
+      const res = await fetch(`http://localhost:8000/api/events?search=${text}&page=${currentPage}&category=${category}`);
       const result = await res.json();
       setTotalPages(Math.ceil(result.total / itemsPerPage)); 
       console.log(result.events)
@@ -53,6 +56,8 @@ export default function List() {
       setIsloading(false);
     }
   };
+
+  console.log(events)
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -68,7 +73,6 @@ export default function List() {
     router.push(pathname + "?" + createQueryString("keyword", text));
     getData(selectedCategory);
   }, [text]);
-
 
   return (
     <div>
