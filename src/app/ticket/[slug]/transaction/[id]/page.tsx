@@ -211,7 +211,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
             Voucher:
           </label>
           <input
-            type="radio"
+            type="checkbox"
             id="voucher"
             name="voucher"
             value={formik.values.voucher}

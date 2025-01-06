@@ -36,7 +36,7 @@ export default function RegisterPage() {
   const handleLogin = async (user: FormValues) => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://localhost:8000/api/auth/loginUser", {
+      const res = await fetch("https://ate-backend.vercel.app/api/auth/loginUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
