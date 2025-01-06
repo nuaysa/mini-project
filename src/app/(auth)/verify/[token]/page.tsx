@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { toastErr } from "@/helpers/toast";

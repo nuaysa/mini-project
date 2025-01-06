@@ -1,14 +1,10 @@
-<<<<<<< HEAD
+
 "use client";
 import Card from "@/components/card";
-=======
-// import Ticket from "@/components/home";
->>>>>>> main
 import Carousel from "@/components/carousell";
 import CreateNew from "@/components/ClickNewEvent";
 import { CompPagination } from "@/components/pagination";
 import Searchbar from "@/components/searchBar";
-<<<<<<< HEAD
 import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import Link from "next/link";
@@ -81,17 +77,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-=======
-import Events from "@/components/tickets";
-import Link from "next/link";
-
-export default function Home() {
-  return (
-    <div className=" h-full static flex flex-col">
-      <Carousel/>
-      <Searchbar/>
-      <Home/>
->>>>>>> main
     </div>
             )
           }
