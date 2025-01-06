@@ -5,7 +5,7 @@ import { ticketSchema } from "@/libs/schema";
 import { TicketInput } from "@/types/type";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const initialValues: TicketInput = {
@@ -20,9 +20,19 @@ const initialValues: TicketInput = {
 export default function CreateTicket() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+
   const onCreate = async (data: TicketInput) => {
-      try {
+    if (!token) {
+      toast.error("Token is missing");
+      return;
+    }
+    try {
         setIsLoading(true);
         const formData = new FormData();
         for (const key in data) {
@@ -43,7 +53,7 @@ export default function CreateTicket() {
     // revalidate("events");
         toast.success(result.message);
         router.push("/");
-      } catch (err) {
+      } catch(err) {
         console.error(err);
       } finally {
         setIsLoading(false);

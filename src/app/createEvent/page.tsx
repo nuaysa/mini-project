@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createSlug } from "@/helpers/createSlug";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import RichTextEditor from "@/components/textEditor";
@@ -28,34 +28,45 @@ const initialValues: EventInput = {
 function EventCreatePage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const token = localStorage.getItem("token");
-  const onCreate = async (data: EventInput) => {
-    try {
-      setIsLoading(true);
-      const formData = new FormData();
-      for (const key in data) {
-        const item = data[key as keyof EventInput];
-        if (item) {
-          // formData.append(key, item);
-        }
+  const [token, setToken] = useState<string | null>(null);
+  useEffect(() => {
+      if (typeof window !== 'undefined') {
+        setToken(localStorage.getItem("token"));
       }
-      const res = await fetch(`https://ate-backend.vercel.app/api/events`, {
-        method: "POST",
-        body: formData,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
-      });
-      const result = await res.json();
-      if (!res.ok) throw result;
-  revalidate("events");
-      toast.success(result.message);
-      router.push("/");
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
+    }, []);
+  
+    const onCreate = async (data: EventInput) => {
+      if (!token) {
+        toast.error("Token is missing");
+        return;
+      }
+      try {
+          setIsLoading(true);
+          const formData = new FormData();
+          for (const key in data) {
+            const item = data[key as keyof EventInput];
+            if (item) {
+              // formData.append(key, item);
+            }
+          }
+          const res = await fetch(`https://ate-backend.vercel.app/api/events/`, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const result = await res.json();
+          if (!res.ok) throw result;
+      // revalidate("events");
+          toast.success(result.message);
+          router.push("/");
+        } catch(err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+        }
+   
   };
   return (
 
