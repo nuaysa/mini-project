@@ -22,7 +22,7 @@ export default function Home() {
   const getData = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:8000/api/events?isActive=true`);
+      const res = await fetch(`https://ate-backend.vercel.app/api/events?isActive=true`);
       const result = await res.json();
       setEvents(result.events);
     } catch (err) {
@@ -48,7 +48,7 @@ export default function Home() {
             <div>
               <h1 className="text-3xl text-center font-semibold text-[#387874]">No Events Found</h1>
             </div>  : 
-                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 ml-12 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 ml-12 gap-5 justify-start">
                 {events.map((item, idx) => {
                   return (
                   <Card

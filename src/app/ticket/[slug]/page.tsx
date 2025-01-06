@@ -3,9 +3,10 @@ import Description from "@/components/tickets";
 import { formatDate } from "@/helpers/dateFormat";
 import { formatPrice } from "@/helpers/priceFormat";
 import formatToWIB from "@/helpers/timeFormat";
-import { getEvents, getEventSlug } from "@/libs/events";
+import { getDetail, getEvents, getEventSlug } from "@/libs/events";
 import { IEvents } from "@/types/type";
 import Image from "next/image";
+import { userAgent } from "next/server";
 import { FaCalendarAlt, FaRegClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -27,13 +28,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function Tickets({ params }: { params: { slug: string } }) {
-  const event: IEvents = await getEventSlug(params.slug);console.log(event.Promotor.avatar)
+  const event: IEvents = await getEventSlug(params.slug);
+  const detail = await getDetail()
   
   return (
     <div className="flex flex-col justify-center">
-      <div className="relative min-h-[80vh] max-h-[100vh] py-20 bg-[#387478]/80 max-w-screen"></div>
-      <div className="relative min-h-[180vh] py-20 bg-neutral-200 min-w-screen"></div>
-          <div className="flex absolute z-30 left-20 my-40 min-w-[400px] lg:w-[90vw] h-max bg-white rounded-xl py-7 px-10">
+      <div className="relative lg:min-h-[90vh] lg:max-h-[100vh] min-h-[90vh] py-20 bg-[#387478]/80 max-w-screen"></div>
+      <div className="relative lg:min-h-[160vh] min-h-[100vh] py-20 bg-neutral-200 min-w-screen"></div>
+          <div className="flex absolute z-30 mx-10 lg:mx-0 lg:left-20 mb-36 w-[80vw] lg:w-[90vw] my-32 h-max bg-white rounded-xl py-7 px-5 lg:px-10">
             <div className="flex flex-col gap-5 w-2/3">
               <h1 className="text-3xl font-semibold text-neutral-700">{event.title}</h1>
               <Image src={event.thumbnail} alt={event.title} width={800} height={800} className="rounded-xl p-2" />
@@ -80,7 +82,7 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
                   <h1 className="text-2xl font-bold">{event.Promotor.name}</h1>
                 </div>
               </div>
-              <div className="hidden lg:flex">
+              <div className="hidden lg:flex items-end">
               <hr className="border border-white" />
               <br />
               <div className="flex flex-col">
@@ -96,14 +98,16 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
               </h5>
               </div>
               </div>
-              <h1 className="text-[#387874] font-semibold text-2xl mt-20 sm:hidden lg:flex">Location : </h1>
+              <h1 className="text-[#387874] font-semibold text-2xl mt-24 sm:hidden lg:flex">Location : </h1>
                 <div className="bg-neutral-400 rounded-xl my-5 sm:hidden lg:flex">
                   <iframe src={event.maps} width={500} height={450} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="overflow-hidden"/>
 
                 </div>
             </div>
           </div>
+          <div className={`flex flex-col gap-5 w-2/3 ${new Date(event.date).getTime() > new Date().getTime () || !detail ? "hidden" : "flex"}`}>
     <Review EventId={event.id}/>
+          </div>
     </div>
   );
 }
