@@ -6,16 +6,20 @@ import { IEvents, ITicket } from "@/types/type";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   voucher: Yup.string().matches(/^[A-Za-z0-9]+$/, "Voucher hanya boleh alfanumerik."),
-  points: Yup.number().max(50000, "Max 50000 points").min(0, "Min 0 points"),
+  points: Yup.number().max(50000, "Max 50000 points").min(0, "Min 0 points").test(`is-multiple-of-10000`, `Amout must be a multiple of 10.000`, (value) => {
+    value !== undefined && value % 10000 === 0
+  }),
 });
 
+export interface userPoints {
+  points:number
+}
 export default function Transaction({ params }: { params: { slug: string; id: number; qty: number } }) {
   const router = useRouter()
   const searchParams = useSearchParams();
@@ -24,12 +28,12 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   const [ticket, setTicket] = useState<ITicket>();
   const [loading, setLoading] = useState(false);
   const [discount, setDiscount] = useState<number>(0);
-  const [voucher, setVoucher] = useState<string | null>(null);
-  const [points, setPoints] = useState<number | null>(null);
+  const [voucher, setVoucher] = useState<number | null>(null);
+  const [points, setPoints] =useState<number | null>(null);
 
   const formik = useFormik({
     initialValues: {
-      voucher: "",
+      voucher: 0,
       points: 0,
     },
     validationSchema,
@@ -42,7 +46,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   useEffect(() => {
     const calculateDiscount = () => {
       const pointsDiscount = points || 0;
-      const voucherDiscount = ticket?.price! * Number(qty) * 0.1 || 0;
+      const voucherDiscount = (ticket?.price! * Number(qty)) * 0.1 || 0;
       const combinedDiscount = pointsDiscount + voucherDiscount;
       setDiscount(combinedDiscount);
     };
@@ -50,20 +54,41 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     calculateDiscount();
   }, [points, voucher]);
 
+  const getPoints = async () => {
+    try{
+      const res = await fetch(`https://ate-backend.vercel.app/api/coupon/points`,
+        {next: {revalidate: 0}})
+        const data = await res.json()
+        return data.points
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const getVoucher = async () => {
+    try{
+      const res = await fetch(`https://ate-backend.vercel.app/api/coupon/voucher`,
+        {next: {revalidate: 0}})
+        const data = await res.json()
+        return data.voucher
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const handleTransaction = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:8000/api/transaction/${params.id}`, {
+      const res = await fetch(`https://ate-backend.vercel.app/api/transaction/${params.id}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           "basePrice": ticket?.price!,
-          "qty": 1,
-          // "userVoucher": `${voucher? voucher : null}`,
-          // "userPoints": `${points ? points : null}`,
+          "qty": qty,
+          "userVoucher": voucher? voucher : null,
+          "userPoints": points ? points : null,
         }),
       })
       const result = await res.json();
@@ -71,7 +96,6 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
       router.push(result.data.redirect_url)
       toast.success("Transaction Successful");
     } catch (error) {
-      console.log(error, "tes");
       toast.error("Transaction Failed");
     }finally{
       setLoading(false);
@@ -81,6 +105,8 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   useEffect(() => {
     getEvent(params.slug);
     getTicket(params.id);
+    getPoints();
+    getVoucher()
   }, []);
 
   const getEvent = async (slug: string) => {
@@ -93,7 +119,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
 
   return (
     <div className="bg-white min-h-screen h-[1100px] flex justify-center items-center">
-      <div className="bg-neutral-200 h-max max-w-[900px] min-w-[600px] absolute flex flex-col justify-center rounded-xl p-10">
+      <div className="bg-neutral-200 h-max lg:w-[600px] min-w-[400px] absolute flex flex-col justify-center rounded-xl p-10">
         <h1 className="text-[#387874] text-2xl font-bold">Event: </h1>
         <h1 className="font-semibold text-xl mb-2">
           {event?.title!} || {event?.location!}
@@ -130,13 +156,13 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
             {formatPrice(ticket?.price! * Number(qty) - discount)}
           </h1>
         </div>
-      {ticket?.discount == false ? (
+      {ticket?.discount == false  ? (
         <div className="text-red-500 text-sm">Discount not available</div>
       ) : (
         <form onSubmit={formik.handleSubmit} className="flex flex-col space-y-4 bg-neutral-100 rounded-lg p-4 mt-4">
         <div className="flex justify-between items-center">
           <label htmlFor="points" className="text-md">
-            Points Id:
+            Points:
           </label>
           <input
             type="number"
@@ -147,35 +173,33 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
             onBlur={formik.handleBlur}
             className="border rounded-lg w-1/2 p-2"
           />
-          {formik.touched.points && formik.errors.points ? (
+          {formik.touched.points && formik.errors.points && getPoints.length == 0 ? (
             <div className="text-red-500 text-sm">{formik.errors.points}</div>
           ) : null}
         </div>
         <div className="flex justify-between items-center">
           <label htmlFor="voucher" className="text-md">
-            Voucher Id:
+
+            Voucher:
           </label>
           <input
-            type="text"
+            type="radio"
             id="voucher"
             name="voucher"
             value={formik.values.voucher}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className="border rounded-lg w-1/2 p-2"
+            className="border rounded-lg p-2"
           />
-          {formik.touched.voucher && formik.errors.voucher ? (
+          {formik.touched.voucher && formik.errors.voucher && getVoucher.length == 0 ? (
             <div className="text-red-500 text-sm">{formik.errors.voucher}</div>
           ) : null}
         </div>
-
         <button type="submit" className="bg-[#387874] text-white rounded-lg p-2 mt-4">
           Submit
         </button>
       </form>
-
       )}
-        
         <br />
         <div className="flex justify-center">
           <Compmodal handleTransaction={handleTransaction} />

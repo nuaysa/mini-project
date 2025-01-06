@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { EventInput } from "@/types/type";
 import { eventSchema } from "@/libs/schema";
 import { FieldThumbnail } from "@/components/thumbnail";
+import { revalidate } from "@/libs/action";
 
 const initialValues: EventInput = {
   title: "",
@@ -28,6 +29,7 @@ const initialValues: EventInput = {
 function EventCreatePage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const token = localStorage.getItem("token");
   const onCreate = async (data: EventInput) => {
     try {
       setIsLoading(true);
@@ -41,13 +43,13 @@ function EventCreatePage() {
       const res = await fetch(`https://ate-backend.vercel.app/api/events`, {
         method: "POST",
         body: formData,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const result = await res.json();
       if (!res.ok) throw result;
-  // revalidate("events");
+  revalidate("events");
       toast.success(result.message);
       router.push("/");
     } catch (err) {

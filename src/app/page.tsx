@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 "use client";
 import Card from "@/components/card";
+=======
+// import Ticket from "@/components/home";
+>>>>>>> main
 import Carousel from "@/components/carousell";
 import CreateNew from "@/components/ClickNewEvent";
+import { CompPagination } from "@/components/pagination";
 import Searchbar from "@/components/searchBar";
+<<<<<<< HEAD
 import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import Link from "next/link";
@@ -21,7 +27,7 @@ export default function Home() {
   const getData = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:8000/api/events`);
+      const res = await fetch(`https://ate-backend.vercel.app/api/events?isActive=true`);
       const result = await res.json();
       setEvents(result.events);
     } catch (err) {
@@ -47,7 +53,7 @@ export default function Home() {
             <div>
               <h1 className="text-3xl text-center font-semibold text-[#387874]">No Events Found</h1>
             </div>  : 
-                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 ml-12 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 ml-12 gap-5 justify-start">
                 {events.map((item, idx) => {
                   return (
                   <Card
@@ -66,7 +72,6 @@ export default function Home() {
                 })}
             </div>
               }
-            
             <Link href="/list" className="text-[#387478] my-3">
               see more events
             </Link>
@@ -76,6 +81,17 @@ export default function Home() {
           </div>
         </div>
       </div>
+=======
+import Events from "@/components/tickets";
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <div className=" h-full static flex flex-col">
+      <Carousel/>
+      <Searchbar/>
+      <Home/>
+>>>>>>> main
     </div>
             )
           }

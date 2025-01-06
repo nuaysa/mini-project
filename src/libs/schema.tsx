@@ -63,3 +63,8 @@ export const ticketSchema = Yup.object().shape({
   endDate: Yup.date().required("End Date is Required"),
   discount: Yup.boolean() 
 })
+
+export const ratingSchema = Yup.object().shape({
+  rating: Yup.string().required("Rating is Required"),
+  desc: Yup.string().required("Review is Required").min(10, "Comment must be at least 10 characters long"),
+})

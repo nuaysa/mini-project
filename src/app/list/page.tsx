@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loading from "../loading";
-import Pagination from "@/components/pagination";
+import { CompPagination } from "@/components/pagination";
 import Searchbar from "@/components/searchBar";
 import { MdOutlineSportsBasketball } from "react-icons/md";
 import { PiBowlFoodBold, PiProjectorScreenBold } from "react-icons/pi";
@@ -80,18 +80,23 @@ export default function List() {
       value = {value}
       onChange= {(e) => setValue(e.target.value)}
       />
-      <div className="hidden lg:flex">
+      <div className="flex">
+        <div
+        className="hidden lg:flex">
         <Sidebar 
         categories ={categories} 
         onCategorySelect={handleCategorySelect}
         />
+        </div>
         <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
           {isLoading ? (
             <Loading />
           ) : events.length == 0 ? (
             <div className="flex justify-center text-[#387478]">events not found, try another keyword</div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-3">
+            <div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 max-sm:justify-center ">
               {events.map((item, idx) => {
                 return (
                   <div key={idx}>
@@ -109,8 +114,9 @@ export default function List() {
                   </div>
                 );
               })}
-              <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
             </div>
+              <CompPagination/>
+              </div>
           )}
           <CreateNew/>
         </div>
