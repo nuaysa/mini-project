@@ -66,7 +66,6 @@ function EventCreatePage() {
         } finally {
           setIsLoading(false);
         }
-   
   };
   return (
 
