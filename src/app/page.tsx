@@ -8,7 +8,6 @@ import { IEvents } from "@/types/type";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
 
 export default function Home() {
   const [events, setEvents] = useState<IEvents[]>([]);

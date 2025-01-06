@@ -43,16 +43,16 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     },
   });
 
-  useEffect(() => {
-    const calculateDiscount = () => {
-      const pointsDiscount = points || 0;
-      const voucherDiscount = (ticket?.price! * Number(qty)) * 0.1 || 0;
-      const combinedDiscount = pointsDiscount + voucherDiscount;
-      setDiscount(combinedDiscount);
-    };
+  // useEffect(() => {
+  //   const calculateDiscount = () => {
+  //     const pointsDiscount = points || 0;
+  //     const voucherDiscount = (ticket?.price! * Number(qty)) * 0.1 || 0;
+  //     const combinedDiscount = pointsDiscount + voucherDiscount;
+  //     setDiscount(combinedDiscount);
+  //   };
 
-    calculateDiscount();
-  }, [points, voucher]);
+  //   calculateDiscount();
+  // }, [points, voucher]);
 
   const getPoints = async () => {
     try{

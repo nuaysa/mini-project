@@ -81,13 +81,13 @@ export default function List() {
       />
       <div className="flex">
         <div
-        className="hidden lg:flex">
+        className="flex">
         <Sidebar 
         categories ={categories} 
         onCategorySelect={handleCategorySelect}
         />
         </div>
-        <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
+        <div className="flex flex-col my-10 bg-neutral-100 mx-5 lg:mx-10 w-full rounded-xl p-10">
           {isLoading ? (
             <Loading />
           ) : events.length == 0 ? (

@@ -50,7 +50,7 @@ export default function Description({
         <input type="number" defaultValue={quota == 0 ? 0 : 1} value={qty} min={1} max={quota > 10 ? 10 : quota}  disabled={quota == 0 ? true: false} className="w-[60px] rounded-xl" onChange={(e) => setQty(parseInt(e.target.value))}/>
       </div>
       <hr />
-        <button onClick={() => {handleBuyTicket(qty)}} disabled={isDisable} className={`mt-3 rounded-lg py-2 mx-40 text-white border border-white ${isDisable? `bg-neutral-400 hover:cursor-not-allowed` : `bg-[#387874]  hover:bg-[#387874]/80` }`}>{quota == 0 ? `Sold Out` : `Buy Ticket`} </button>
+        <button onClick={() => {handleBuyTicket(qty)}} disabled={isDisable} className={`mt-3 rounded-lg py-2 lg:mx-40 text-white border border-white ${isDisable? `bg-neutral-400 hover:cursor-not-allowed` : `bg-[#387874]  hover:bg-[#387874]/80` }`}>{quota == 0 ? `Sold Out` : `Buy Ticket`} </button>
       </div>
     </div>
   );
