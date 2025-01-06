@@ -11,10 +11,11 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
-  voucher: Yup.string().matches(/^[A-Za-z0-9]+$/, "Voucher hanya boleh alfanumerik."),
-  points: Yup.number().max(50000, "Max 50000 points").min(0, "Min 0 points").test(`is-multiple-of-10000`, `Amout must be a multiple of 10.000`, (value) => {
-    value !== undefined && value % 10000 === 0
-  }),
+  voucher: Yup.number(),
+  points: Yup.number().max(50000, "Max 50000 points").min(0, "Min 0 points")
+  .test(`is-multiple-of-10000`, `Amount must be a multiple of 10.000`, (value) => {
+    if (value === null || value === undefined) return true; 
+      return value % 10000 === 0 || value === 0  }),
 });
 
 export interface userPoints {
@@ -30,6 +31,8 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   const [discount, setDiscount] = useState<number>(0);
   const [voucher, setVoucher] = useState<number | null>(null);
   const [points, setPoints] =useState<number | null>(null);
+  const [userPoints, setUserPoints] =useState<number[] | null>(null);
+  const [userVoucher, setUserVoucher] =useState<number[] | null>(null);
 
   const formik = useFormik({
     initialValues: {
@@ -43,23 +46,13 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     },
   });
 
-  // useEffect(() => {
-  //   const calculateDiscount = () => {
-  //     const pointsDiscount = points || 0;
-  //     const voucherDiscount = (ticket?.price! * Number(qty)) * 0.1 || 0;
-  //     const combinedDiscount = pointsDiscount + voucherDiscount;
-  //     setDiscount(combinedDiscount);
-  //   };
-
-  //   calculateDiscount();
-  // }, [points, voucher]);
-
   const getPoints = async () => {
     try{
       const res = await fetch(`https://ate-backend.vercel.app/api/coupon/points`,
         {next: {revalidate: 0}})
         const data = await res.json()
-        return data.points
+        const points = data.points
+        setUserPoints(points)
     }catch(err){
       console.log(err)
     }
@@ -70,11 +63,45 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
       const res = await fetch(`https://ate-backend.vercel.app/api/coupon/voucher`,
         {next: {revalidate: 0}})
         const data = await res.json()
-        return data.voucher
+        const voucher = data.voucher
+        setUserVoucher(voucher)
     }catch(err){
       console.log(err)
     }
   }
+
+  useEffect(() => {
+    const calculateDiscount = () => {
+      if (!userPoints || !userVoucher) {
+        if(points){
+          return toast.error("invalid points")
+        }
+        if(voucher){
+          return toast.error("invalid points")
+        }
+        else{
+          return
+        }
+      }; 
+  
+      let pointsDiscount = 0; 
+      let voucherDiscount = 0; 
+  
+      if (points && points <= userPoints.reduce((a,b) => a+b)) {
+        pointsDiscount = points; 
+      }
+  
+      if (voucher && userVoucher.includes(voucher)) {
+        voucherDiscount = (ticket?.price! * Number(qty)) * 0.1; 
+      }
+  
+      const combinedDiscount = pointsDiscount + voucherDiscount;
+      setDiscount(combinedDiscount);
+    };
+  
+    calculateDiscount();
+  }, [points, voucher, userPoints, userVoucher, ticket?.price, qty]);
+  
 
   const handleTransaction = async () => {
     try {
@@ -102,6 +129,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     }
   };
 
+  
   useEffect(() => {
     getEvent(params.slug);
     getTicket(params.id);
@@ -118,6 +146,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   };
 
   return (
+    <>
     <div className="bg-white min-h-screen h-[1100px] flex justify-center items-center">
       <div className="bg-neutral-200 h-max lg:w-[600px] min-w-[400px] absolute flex flex-col justify-center rounded-xl p-10">
         <h1 className="text-[#387874] text-2xl font-bold">Event: </h1>
@@ -179,7 +208,6 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         </div>
         <div className="flex justify-between items-center">
           <label htmlFor="voucher" className="text-md">
-
             Voucher:
           </label>
           <input
@@ -206,5 +234,6 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         </div>
       </div>
     </div>
+    </>
   );
 }

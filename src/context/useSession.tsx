@@ -1,5 +1,6 @@
 "use client";
 
+import { IUser } from "@/types/type";
 import React, {
   createContext,
   useContext,
@@ -7,7 +8,6 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import { IUser } from "@/types/blog";
 
 interface SessionContextProps {
   isAuth: boolean;

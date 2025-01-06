@@ -56,8 +56,6 @@ export default function List() {
     }
   };
 
-  console.log(events)
-
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
