@@ -6,7 +6,7 @@ export const getEvents = async () => {
 };
 
 export const getEventSlug = async (slug: string) => {
-  const res = await fetch(`https://ate-backend.vercel.app/api/events/${slug}`, 
+  const res = await fetch(`https://ate-backend.vercel.app/api/events/${slug}`,
   { next: { revalidate: 0 } });
   const data = await res.json();
   return data.event;

@@ -105,6 +105,7 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
                 </div>
             </div>
           </div>
+
           <div className={`flex flex-col gap-5 w-2/3 ${new Date(event.date).getTime() > new Date().getTime () || !detail ? "hidden" : "flex"}`}>
     <Review EventId={event.id}/>
           </div>

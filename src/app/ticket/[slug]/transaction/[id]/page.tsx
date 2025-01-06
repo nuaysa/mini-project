@@ -29,7 +29,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   const [loading, setLoading] = useState(false);
   const [discount, setDiscount] = useState<number>(0);
   const [voucher, setVoucher] = useState<number | null>(null);
-  const [points, setPoints] = useState<number | null>(null);
+  const [points, setPoints] =useState<number | null>(null);
 
   const formik = useFormik({
     initialValues: {
@@ -102,7 +102,6 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     }
   };
 
-  
   useEffect(() => {
     getEvent(params.slug);
     getTicket(params.id);
@@ -180,6 +179,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
         </div>
         <div className="flex justify-between items-center">
           <label htmlFor="voucher" className="text-md">
+
             Voucher:
           </label>
           <input
