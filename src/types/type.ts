@@ -16,7 +16,7 @@ export interface IEvents{
     time: Date;
     type: "Paid" | "Free";
     thumbnail: string;
-    isActive: Boolean;
+    isActive: boolean;
     slug: string;
     Promotor: IPromotor;
     ticket: ITicket[]
@@ -36,8 +36,8 @@ export interface ITicket {
         category: "VIP"| "Cat1" | "Cat2" | "festivalPass" | "free",
         startDate: Date,
         endDate: Date,
-        isActive: Boolean,
-        discount: Boolean,
+        isActive: boolean,
+        discount: boolean,
         quota: number,
    }
 
@@ -62,7 +62,7 @@ export interface EventInput {
     startDate: Date;
     endDate: Date;
     quota: number;
-    discount: Boolean;
+    discount: boolean;
   }
 
   export interface ITransaction {

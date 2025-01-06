@@ -1,7 +1,7 @@
 export default function formatToWIB(dateString: Date) {
     const date: Date = new Date(dateString);
   
-    const options: {} = {
+    const options: object = {
       hour: "2-digit",
       minute: "2-digit",
       timeZone: "Asia/Jakarta",

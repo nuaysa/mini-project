@@ -17,7 +17,7 @@ const initialValues: TicketInput = {
   discount: false
 };
 
-export default function createTicket() {
+export default function CreateTicket() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const token = localStorage.getItem("token");
@@ -109,7 +109,7 @@ export default function createTicket() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
-                props.setFieldValue("startDate", value);
+                props.setFieldValue("startDate", formatDatetimeForDB(value, "00:00:00"));
               }}
             />
             <ErrorMessage name="startDate" component="span" className="text-sm text-red-500" />
@@ -126,7 +126,7 @@ export default function createTicket() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
-                props.setFieldValue("endDate", value);
+                props.setFieldValue("endDate", formatDatetimeForDB(value,"00:00:00"));
               }}
             />
             <ErrorMessage name="endDate" component="span" className="text-sm text-red-500" />

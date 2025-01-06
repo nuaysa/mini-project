@@ -1,27 +1,18 @@
-<<<<<<< HEAD
+
 "use client";
 import Card from "@/components/card";
-=======
-// import Ticket from "@/components/home";
->>>>>>> main
 import Carousel from "@/components/carousell";
 import CreateNew from "@/components/ClickNewEvent";
-import { CompPagination } from "@/components/pagination";
 import Searchbar from "@/components/searchBar";
-<<<<<<< HEAD
-import Sidebar from "@/components/sidebar";
 import { IEvents } from "@/types/type";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
 
 export default function Home() {
   const [events, setEvents] = useState<IEvents[]>([]);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [value, setValue] = useState<string>(searchParams.get("keyword") || "");
-  const [text] = useDebounce(value, 500);
   const [loading, setLoading] = useState(false);
  
   const getData = async () => {
@@ -81,17 +72,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-=======
-import Events from "@/components/tickets";
-import Link from "next/link";
-
-export default function Home() {
-  return (
-    <div className=" h-full static flex flex-col">
-      <Carousel/>
-      <Searchbar/>
-      <Home/>
->>>>>>> main
     </div>
             )
           }

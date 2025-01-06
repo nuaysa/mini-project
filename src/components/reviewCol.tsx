@@ -6,7 +6,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { FieldThumbnail } from "./thumbnail";
 
 const initialValues: ReviewInput = {
   desc: "",
@@ -19,7 +18,6 @@ interface review {
 
 function Review({ EventId }: review) {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
   const id = EventId;
   const onCreate = async (data: ReviewInput) => {
     const token = localStorage.getItem("token");

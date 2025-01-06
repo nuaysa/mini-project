@@ -20,7 +20,6 @@ const categories = [
   { id: 4, name: 'food', icon: <PiBowlFoodBold className="text-3xl" /> },
 ]
 
-const base_url = process.env.BASE_URL_BE;
 export default function List() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1)
@@ -57,8 +56,6 @@ export default function List() {
     }
   };
 
-  console.log(events)
-
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -82,13 +79,13 @@ export default function List() {
       />
       <div className="flex">
         <div
-        className="hidden lg:flex">
+        className="flex">
         <Sidebar 
         categories ={categories} 
         onCategorySelect={handleCategorySelect}
         />
         </div>
-        <div className="flex flex-col my-10 bg-neutral-100 mx-10 w-full rounded-xl p-10">
+        <div className="flex flex-col my-10 bg-neutral-100 mx-5 lg:mx-10 w-full rounded-xl p-10">
           {isLoading ? (
             <Loading />
           ) : events.length == 0 ? (

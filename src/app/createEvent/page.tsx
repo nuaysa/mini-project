@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { createSlug } from "@/helpers/createSlug";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import RichTextEditor from "@/components/textEditor";
-// import { FieldThumbnail } from "@/components/form/blog/thumbnail";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { EventInput } from "@/types/type";
@@ -43,9 +42,9 @@ function EventCreatePage() {
       const res = await fetch(`https://ate-backend.vercel.app/api/events`, {
         method: "POST",
         body: formData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
       const result = await res.json();
       if (!res.ok) throw result;
@@ -147,7 +146,7 @@ function EventCreatePage() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const value = e.target.value;
-                    props.setFieldValue("Date", value);
+                    props.setFieldValue("Date", formatDatetimeForDB(value, "00:00:00"));
                   }}
                 />
                 <ErrorMessage name="Date" component="span" className="text-sm text-red-500" />
@@ -164,7 +163,8 @@ function EventCreatePage() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const value = e.target.value;
-                    props.setFieldValue("Time", value);
+                    const today = new Date().toDateString()
+                    props.setFieldValue("Time", formatDatetimeForDB(today, value));
                   }}
                 />
                 <ErrorMessage name="Time" component="span" className="text-sm text-red-500" />
@@ -211,19 +211,19 @@ function EventCreatePage() {
                   </span>
               </div>
               <div>
-                <label htmlFor="MapURL" className="block mb-2 text-sm w-max font-medium text-gray-900">
+                <label htmlFor="maps" className="block mb-2 text-sm w-max font-medium text-gray-900">
                   Map URL
                 </label>
                 <Field
-                  name="MapURL"
+                  name="maps"
                   type="text"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const value = e.target.value;
-                    props.setFieldValue("MapURL", value);
+                    props.setFieldValue("maps", value);
                   }}
                 />
-                <ErrorMessage name="MapURL" component="span" className="text-sm text-red-500" />
+                <ErrorMessage name="maps" component="span" className="text-sm text-red-500" />
               </div>
 
               <div>

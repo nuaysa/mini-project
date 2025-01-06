@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { toastErr } from "@/helpers/toast";
@@ -5,7 +6,7 @@ import { useEffect } from "react";
 
 const base_url = process.env.NEXT_PUBLIC_BASE_BE;
 
-export default function verifyPage({ params }: { params: { token: string } }) {
+export default function VerifyPage({ params }: { params: { token: string } }) {
     const router = useRouter();
     const onVerify = async () => {
         try {

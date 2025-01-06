@@ -6,7 +6,6 @@ import formatToWIB from "@/helpers/timeFormat";
 import { getDetail, getEvents, getEventSlug } from "@/libs/events";
 import { IEvents } from "@/types/type";
 import Image from "next/image";
-import { userAgent } from "next/server";
 import { FaCalendarAlt, FaRegClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -36,11 +35,14 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
       <div className="relative lg:min-h-[90vh] lg:max-h-[100vh] min-h-[90vh] py-20 bg-[#387478]/80 max-w-screen"></div>
       <div className="relative lg:min-h-[160vh] min-h-[100vh] py-20 bg-neutral-200 min-w-screen"></div>
           <div className="flex absolute z-30 mx-10 lg:mx-0 lg:left-20 mb-36 w-[80vw] lg:w-[90vw] my-32 h-max bg-white rounded-xl py-7 px-5 lg:px-10">
-            <div className="flex flex-col gap-5 w-2/3">
+            <div className="flex flex-col gap-5 w-full lg:w-2/3">
               <h1 className="text-3xl font-semibold text-neutral-700">{event.title}</h1>
               <Image src={event.thumbnail} alt={event.title} width={800} height={800} className="rounded-xl p-2" />
-              <div className="flex gap-5 mb-3 lg:hidden">
-                <Image src={event.Promotor.avatar} alt="Organizer" width={30} height={30} className="rounded-full" />
+              <div className="flex gap-5 lg:hidden">
+                <div className="">
+                <Image src={event.Promotor.avatar} alt="Organizer" width={40} height={40} className="rounded-full"
+                 />
+                 </div>
                 <div className="flex flex-col">
                   <h3 className="text-md text-neutral-700">Event Organizer</h3>
                   <h1 className="text-lg lg:text-2xl font-bold">{event.Promotor.name}</h1>
