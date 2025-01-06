@@ -1,6 +1,3 @@
-<<<<<<<< HEAD:src/components/transaction/detail.tsx
-export default function transactionDet(){
-========
 
 "use client"
 
@@ -51,7 +48,6 @@ export default function createTicket() {
         setIsLoading(false);
       }
     };
->>>>>>>> a615f3134d111b4b9148e67f8e699388ff54f1e2:src/app/createEvent/createTicket/page.tsx
     return(
         <div>
               <div className="flex justify-center items-center">

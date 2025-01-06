@@ -6,7 +6,6 @@ import formatToWIB from "@/helpers/timeFormat";
 import { getDetail, getEvents, getEventSlug } from "@/libs/events";
 import { IEvents } from "@/types/type";
 import Image from "next/image";
-import { userAgent } from "next/server";
 import { FaCalendarAlt, FaRegClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 

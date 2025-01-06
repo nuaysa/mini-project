@@ -17,7 +17,7 @@ const initialValues: TicketInput = {
   discount: false
 };
 
-export default function createTicket() {
+export default function CreateTicket() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const token = localStorage.getItem("token");

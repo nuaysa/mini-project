@@ -2,7 +2,6 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 
 interface searchbarProps{
     value: string
@@ -12,7 +11,6 @@ interface searchbarProps{
 export default function Searchbar({value, onChange,}: searchbarProps) {   
     const router = useRouter()
     const searchParams = useSearchParams();
-    const [Value, setValue] = useState<string>(searchParams.get("keyword") || "");
     const handleSearch = () => {
         router.push(`/list?keyword=${value}`);
       };

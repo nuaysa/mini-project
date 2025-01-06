@@ -20,7 +20,6 @@ const categories = [
   { id: 4, name: 'food', icon: <PiBowlFoodBold className="text-3xl" /> },
 ]
 
-const base_url = process.env.BASE_URL_BE;
 export default function List() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1)
