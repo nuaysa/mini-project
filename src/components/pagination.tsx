@@ -10,7 +10,7 @@ export function CompPagination() {
     useEffect(() => {
         const fetchTotalPages = async () => {
           try {
-            const response = await fetch('http://localhost:8000/api/events');
+            const response = await fetch('https://ate-backend.vercel.app/api/events');
             const data = await response.json();
             const totalEvents = data.events.length; 
             console.log(totalEvents)

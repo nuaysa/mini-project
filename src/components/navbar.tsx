@@ -14,7 +14,7 @@ import {
   
   export function Compnavbar() {
     return (
-      <Navbar fluid rounded  className="bg-[#387874]">
+      <Navbar fluid rounded>
         <NavbarBrand href="/">
           <img src="/favicon.ico" className="mr-3 h-6 sm:h-9" alt="ATE|All Tickets and Events" />
           <span className="self-center whitespace-nowrap text-xl font-semibold">ATE</span>

@@ -44,7 +44,7 @@ export default function List() {
       setIsloading(true);
       console.log("Fetching data for category:", category);
 
-      const res = await fetch(`http://localhost:8000/api/events?search=${text}&page=${currentPage}&category=${category}`);
+      const res = await fetch(`https://ate-backend.vercel.app/api/events?search=${text}&page=${currentPage}&category=${category}`);
       const result = await res.json();
       setTotalPages(Math.ceil(result.total / itemsPerPage)); 
       console.log(result.events)

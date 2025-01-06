@@ -52,7 +52,7 @@ export default function SignUpPage() {
   const handleAdd = async (user: FormValues) => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://localhost:8000/api/auth/registerUser", {
+      const res = await fetch("https://ate-backend.vercel.app/api/auth/registerUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

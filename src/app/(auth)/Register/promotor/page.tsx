@@ -47,7 +47,7 @@ export default function SignUpPage() {
     try {
       setIsLoading(true);
       const res = await fetch(
-        "http://localhost:8000/api/auth/registerPromotor",
+        "https://ate-backend.vercel.app/api/auth/registerPromotor",
         {
           method: "POST",
           headers: {
