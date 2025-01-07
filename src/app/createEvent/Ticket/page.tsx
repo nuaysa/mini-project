@@ -56,6 +56,7 @@ export default function CreateTicket() {
         if (!res.ok) throw result;
     // revalidate("events");
         toast.success(result.message);
+        console.log(result)
         router.push("/");
       } catch(err) {
         console.error(err);

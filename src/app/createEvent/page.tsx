@@ -61,6 +61,7 @@ function EventCreatePage() {
             },
           });
           const result = await res.json();
+          console.log(result)
           if (!res.ok) throw result;
       revalidate("events");
           toast.success(result.message);
