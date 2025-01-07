@@ -74,7 +74,7 @@ export default function SignUpPage() {
           <h1 className="text-3xl font-bold text-gray-950">Sign Up</h1>
           <p className="text-gray-500">
             Already have an account?{" "}
-            <Link href={"/Login/Promotor"} className="text-[#387478] font-bold">
+            <Link href={"/Login/promotor"} className="text-[#387478] font-bold">
               Sign In
             </Link>
           </p>
