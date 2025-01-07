@@ -27,7 +27,7 @@ function Review({ EventId }: review) {
       for (const key in data) {
         const item = data[key as keyof ReviewInput];
         if (item) {
-          // formData.append(key, item);
+          formData.append(key, item);
         }
       }
       const res = await fetch(`https://ate-backend.vercel.app/api/review/${id}`, {
