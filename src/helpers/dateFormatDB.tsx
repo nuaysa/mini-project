@@ -1,11 +1,20 @@
+export const formatDatetimeForDB = (date: string, time: string): string => {
+  const dateObj = new Date(date);
 
-const formatDatetimeForDB = (date: string, time:string) => {
-    const datePart = new Date(date).toISOString(); // Format 'YYYY-MM-DD'
-    const timePart = time.includes(":") ? time : "00:00:00"; // Tambahkan waktu default jika kosong
-    return `${datePart} ${timePart}`;
-  };
-<<<<<<< HEAD
-  export default formatDatetimeForDB
-=======
+  // Validasi apakah tanggal valid
+  if (isNaN(dateObj.getTime())) {
+    throw new Error("Invalid date format");
+  }
 
->>>>>>> 8ea066e9f629006e55a134735e7a675213b27f37
+  // Format tanggal menjadi 'YYYY-MM-DD'
+  const year = dateObj.getUTCFullYear();
+  const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getUTCDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  // Validasi waktu atau gunakan default '00:00:00'
+  const formattedTime = time.includes(":") ? time : "00:00:00";
+
+  // Gabungkan tanggal dan waktu dalam format standar ISO (tanpa 'T' atau 'Z')
+  return `${formattedDate}T${formattedTime}`;
+};
