@@ -53,7 +53,6 @@ function EventCreatePage() {
             }
           }
         }
-
           const res = await fetch(`https://ate-backend.vercel.app/api/events/`, {
             method: "POST",
             body: formData,
@@ -62,6 +61,8 @@ function EventCreatePage() {
             },
           });
           const result = await res.json();
+
+          console.log(result)
           if (!res.ok) throw result;
       revalidate("events");
           toast.success(result.message);
