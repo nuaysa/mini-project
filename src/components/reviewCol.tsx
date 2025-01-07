@@ -50,7 +50,7 @@ function Review({ EventId }: review) {
     }
 
   return (
-    <div className="flex justify-center items-center bg-neutral-200 w-[98.8vw] pt-40">
+    <div className="flex justify-center items-center bg-neutral-200 w-[100vw] pt-40">
       <div className="container mx-20 my-2 w-[900px] bg-neutral-100 shadow-md px-20 py-10 rounded-xl mt-36">
         <Formik
           initialValues={initialValues}
