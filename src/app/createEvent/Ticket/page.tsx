@@ -37,8 +37,12 @@ export default function CreateTicket() {
         const formData = new FormData();
         for (const key in data) {
           const item = data[key as keyof TicketInput];
-          if (item) {
-            // formData.append(key, item);
+          if (item !== undefined && item !== null) {
+            if (typeof item === "string" || typeof item === "number") {
+              formData.append(key, item.toString());
+            } else if (item instanceof Date) {
+              formData.append(key, item.toISOString());
+            }
           }
         }
         const res = await fetch(`https://ate-backend.vercel.app/api/events/ticket`, {

@@ -20,7 +20,7 @@ const initialValues: EventInput = {
   time: "",
   location: "Bandung",
   venue: "",
-  mapURL: "",
+  maps: "",
   type: "Paid",
   thumbnail: "",
 };
@@ -41,14 +41,18 @@ function EventCreatePage() {
         return;
       }
       try {
-          setIsLoading(true);
-          const formData = new FormData();
-          for (const key in data) {
-            const item = data[key as keyof EventInput];
-            if (item) {
-              // formData.append(key, item);
+        setIsLoading(true);
+        const formData = new FormData();
+        for (const key in data) {
+          const item = data[key as keyof EventInput];
+          if (item !== undefined && item !== null) {
+            if (typeof item === "string" || typeof item === "number") {
+              formData.append(key, item.toString());
+            } else if (item instanceof Date) {
+              formData.append(key, item.toISOString());
             }
           }
+        }
           const res = await fetch(`https://ate-backend.vercel.app/api/events/`, {
             method: "POST",
             body: formData,
@@ -58,7 +62,7 @@ function EventCreatePage() {
           });
           const result = await res.json();
           if (!res.ok) throw result;
-      // revalidate("events");
+      revalidate("events");
           toast.success(result.message);
           router.push("/");
         } catch(err) {

@@ -51,7 +51,7 @@ export interface EventInput {
     time: string;
     location: "Bandung" | "Jakarta" | "Bogor" | "Depok" |"Tangerang" | "Bekasi";
     venue: string;
-    mapURL: string;
+    maps: string;
     type: "Paid" | "Free";
     thumbnail: File | string | null;
   }
