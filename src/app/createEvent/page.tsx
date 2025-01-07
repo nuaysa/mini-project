@@ -53,6 +53,7 @@ function EventCreatePage() {
             }
           }
         }
+
           const res = await fetch(`https://ate-backend.vercel.app/api/events/`, {
             method: "POST",
             body: formData,
@@ -70,7 +71,6 @@ function EventCreatePage() {
         } finally {
           setIsLoading(false);
         }
-   
   };
   return (
 
@@ -250,7 +250,7 @@ function EventCreatePage() {
               </div>
               <div className="flex sm:justify-end mt-3">
                 <button 
-                onClick = {(e) => router.push("/createEvent/createTicket")} type="submit" disabled={isLoading} className=" h-[40px] disabled:cursor-not-allowed disabled:bg-[#8a8a8b] sm:w-[120px] text-[#f5f5f7] bg-[#387874] hover:bg-[#387872]/60 focus:ring-1 rounded-lg">
+                onClick = {(e) => router.push("/createEvent/Ticket")} type="submit" disabled={isLoading} className=" h-[40px] disabled:cursor-not-allowed disabled:bg-[#8a8a8b] sm:w-[120px] text-[#f5f5f7] bg-[#387874] hover:bg-[#387872]/60 focus:ring-1 rounded-lg">
                   {isLoading ? "Loading..." : "Continue"}
                 </button>
               </div>
