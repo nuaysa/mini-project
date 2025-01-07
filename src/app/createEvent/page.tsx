@@ -10,7 +10,6 @@ import { EventInput } from "@/types/type";
 import { eventSchema } from "@/libs/schema";
 import { FieldThumbnail } from "@/components/thumbnail";
 import { revalidate } from "@/libs/action";
-import formatDatetimeForDB from "@/helpers/dateFormatDB";
 
 const initialValues: EventInput = {
   title: "",
@@ -163,7 +162,7 @@ function EventCreatePage() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const value = e.target.value;
-                    props.setFieldValue("Date", formatDatetimeForDB(value, "00:00:00"));
+                    props.setFieldValue("Date", value);
                   }}
                 />
                 <ErrorMessage name="Date" component="span" className="text-sm text-red-500" />
@@ -181,7 +180,7 @@ function EventCreatePage() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const value = e.target.value;
                     const today = new Date().toDateString()
-                    props.setFieldValue("Time", formatDatetimeForDB(today, value));
+                    props.setFieldValue("Time", value);
                   }}
                 />
                 <ErrorMessage name="Time" component="span" className="text-sm text-red-500" />
