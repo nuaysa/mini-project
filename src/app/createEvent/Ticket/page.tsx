@@ -1,7 +1,6 @@
 
 "use client"
 
-import formatDatetimeForDB from "@/helpers/dateFormatDB";
 import { ticketSchema } from "@/libs/schema";
 import { TicketInput } from "@/types/type";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -125,7 +124,7 @@ export default function CreateTicket() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
-                props.setFieldValue("startDate", formatDatetimeForDB(value, "00:00:00"));
+                props.setFieldValue("startDate", value);
               }}
             />
             <ErrorMessage name="startDate" component="span" className="text-sm text-red-500" />
@@ -142,7 +141,7 @@ export default function CreateTicket() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
-                props.setFieldValue("endDate", formatDatetimeForDB(value,"00:00:00"));
+                props.setFieldValue("endDate", value);
               }}
             />
             <ErrorMessage name="endDate" component="span" className="text-sm text-red-500" />
