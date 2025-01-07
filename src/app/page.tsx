@@ -44,7 +44,7 @@ export default function Home() {
             <div>
               <h1 className="text-3xl text-center font-semibold text-[#387874]">No Events Found</h1>
             </div>  : 
-                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 ml-12 gap-5 justify-start">
+                <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 lg:grid-rows-3 md:grid-rows-2 ml-12 gap-5 justify-start">
                 {events.map((item, idx) => {
                   return (
                   <Card
