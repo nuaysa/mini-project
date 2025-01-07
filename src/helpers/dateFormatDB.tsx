@@ -5,3 +5,4 @@ const formatDatetimeForDB = (date: string, time:string) => {
     return `${datePart} ${timePart}`;
   };
 
+export default formatDatetimeForDB;
