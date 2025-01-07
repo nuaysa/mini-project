@@ -1,4 +1,4 @@
-const formatDatetimeForDB = (date: string, time: string): string => {
+export const formatDatetimeForDB = (date: string, time: string): string => {
   const dateObj = new Date(date);
 
   // Validasi apakah tanggal valid
@@ -19,4 +19,3 @@ const formatDatetimeForDB = (date: string, time: string): string => {
   return `${formattedDate}T${formattedTime}`;
 };
 
-export default formatDatetimeForDB;
