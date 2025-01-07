@@ -14,10 +14,3 @@ const formatDateForInput = (dateString) => {
   return `${year}-${month}-${day}`;
 };
 
-// Contoh penggunaan
-try {
-  const formattedDate = formatDateForInput("Tue Jan 07 2025 10:04:10 GMT+0700");
-  console.log(formattedDate); // Output: 2025-01-07
-} catch (error) {
-  console.error(error.message);
-}
