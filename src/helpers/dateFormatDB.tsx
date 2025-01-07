@@ -3,3 +3,4 @@ const formatDatetimeForDB = (date: string, time:string) => {
     const timePart = time.includes(":") ? time : "00:00:00"; // Tambahkan waktu default jika kosong
     return `${datePart} ${timePart}`;
   };
+  export default formatDatetimeForDB

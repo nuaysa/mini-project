@@ -10,6 +10,7 @@ import { EventInput } from "@/types/type";
 import { eventSchema } from "@/libs/schema";
 import { FieldThumbnail } from "@/components/thumbnail";
 import { revalidate } from "@/libs/action";
+import formatDatetimeForDB from "@/helpers/dateFormatDB";
 
 const initialValues: EventInput = {
   title: "",
