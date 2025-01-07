@@ -32,8 +32,8 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
   
   return (
     <div className="flex flex-col justify-center">
-      <div className="relative lg:min-h-[50vh] lg:max-h-[100vh] min-h-[90vh] py-20 bg-[#387478]/80 max-w-screen"></div>
-      <div className="relative lg:min-h-[100vh] min-h-[100vh] py-20 bg-neutral-200 min-w-screen"></div>
+      <div className="relative lg:min-h-[30vh] lg:max-h-[100vh] min-h-[90vh] py-20 bg-[#387478]/80 max-w-screen"></div>
+      <div className="relative lg:min-h-[70vh] min-h-[100vh] py-20 bg-neutral-200 min-w-screen"></div>
           <div className="flex absolute z-30 mx-10 lg:mx-0 lg:left-20 mb-36 w-[80vw] lg:w-[90vw] my-32 h-max bg-white rounded-xl py-7 px-5 lg:px-10">
             <div className="flex flex-col gap-5 w-full lg:w-2/3">
               <h1 className="text-3xl font-semibold text-neutral-700">{event.title}</h1>
