@@ -44,8 +44,10 @@ function Review({ EventId }: review) {
     }
 
   return (
+
     <div className="flex justify-center items-center  lg:w-[90vw] w-screen my-5">
       <div className="lg:mx-20 mx-3 my-5 w-[900px] bg-neutral-200 shadow-md lg:px-20 px-5 lg:py-10 py-5 rounded-xl">
+
         <Formik
           initialValues={initialValues}
           validationSchema={ratingSchema}

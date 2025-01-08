@@ -11,9 +11,9 @@ import { toast } from "react-toastify";
 const initialValues: TicketInput = {
   price: 0,
   quota: 0,
-  category: "Cat1",
-  startDate: new Date(),
-  endDate: new Date(),
+  category: "",
+  startDate: "",
+  endDate: "",
   discount: false
 };
 
