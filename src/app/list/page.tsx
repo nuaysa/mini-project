@@ -77,7 +77,7 @@ export default function List() {
       value = {value}
       onChange= {(e) => setValue(e.target.value)}
       />
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
         <div
         className="flex">
         <Sidebar 
@@ -85,7 +85,7 @@ export default function List() {
         onCategorySelect={handleCategorySelect}
         />
         </div>
-        <div className="flex flex-col my-10 bg-neutral-100 mx-5 lg:mx-10 w-full rounded-xl p-10">
+        <div className="flex flex-col my-10 bg-neutral-100 lg:mx-10 w-full rounded-xl p-10">
           {isLoading ? (
             <Loading />
           ) : events.length == 0 ? (

@@ -1,26 +1,27 @@
 
 "use client"
 
-import formatDatetimeForDB from "@/helpers/dateFormatDB";
 import { ticketSchema } from "@/libs/schema";
 import { TicketInput } from "@/types/type";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const initialValues: TicketInput = {
   price: 0,
   quota: 0,
-  category: "Cat1",
-  startDate: new Date(),
-  endDate: new Date(),
+  category: "",
+  startDate: "",
+  endDate: "",
   discount: false
 };
 
-export default function CreateTicket() {
+export default function CreateTicket({ params }: { params: { id: number } }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams()
+  const EventId = Number(searchParams.get("id"))
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -35,22 +36,12 @@ export default function CreateTicket() {
     }
     try {
         setIsLoading(true);
-        const formData = new FormData();
-        for (const key in data) {
-          const item = data[key as keyof TicketInput];
-          if (item !== undefined && item !== null) {
-            if (typeof item === "string" || typeof item === "number") {
-              formData.append(key, item.toString());
-            } else if (item instanceof Date) {
-              formData.append(key, item.toISOString());
-            }
-          }
-        }
-        const res = await fetch(`https://ate-backend.vercel.app/api/events/ticket`, {
+        const res = await fetch(`https://ate-backend.vercel.app/api/events/ticket/${params.id}`, {
           method: "POST",
-          body: formData,
+          body: JSON.stringify(data),
           headers: {
             Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
           },
         });
         const result = await res.json();
@@ -61,6 +52,7 @@ export default function CreateTicket() {
         router.push("/");
       } catch(err) {
         console.error(err);
+        toast.error("ticket failed to create")
       } finally {
         setIsLoading(false);
       }
@@ -75,10 +67,11 @@ export default function CreateTicket() {
     validationSchema={ticketSchema}
     onSubmit={(values, actions) => {
       onCreate(values);
-      actions.resetForm();
+      // actions.resetForm();
     }}
   >
     {(props) => {
+          console.log(props.errors)
       return (
         <Form className="flex flex-col gap-3 justify-center">
           
@@ -102,12 +95,12 @@ export default function CreateTicket() {
             <label htmlFor="category" className="block mb-2 text-sm w-max font-medium text-gray-900">
               Ticket Category
             </label>
-            <Field name="Ticket Category" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
-              <option value="">~ Ticket Category ~</option>
+            <Field name="category" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
+              <option value=""> Ticket Category </option>
               <option value="VIP">VIP</option>
-              <option value="Cat1">Cat1</option>
-              <option value="Cat2">Cat2</option>
-              <option value="festivalPass">FestivalPass</option>
+              <option value="Cat1">Cat 1</option>
+              <option value="Cat2">Cat 2</option>
+              <option value="festivalPass">Festival Pass</option>
               <option value="free">Free</option>
               </Field>
             <ErrorMessage name="category" component="span" className="text-sm text-red-500" />
@@ -125,7 +118,8 @@ export default function CreateTicket() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
-                props.setFieldValue("startDate", formatDatetimeForDB(value, "00:00:00"));
+                console.log(value)
+                props.setFieldValue("startDate", value);
               }}
             />
             <ErrorMessage name="startDate" component="span" className="text-sm text-red-500" />
@@ -135,14 +129,14 @@ export default function CreateTicket() {
             <label htmlFor="endDate" className="block mb-2 text-sm w-max font-medium text-gray-900">
               End Date
             </label>
-            
             <Field
               name="endDate"
               type="Date"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
-                props.setFieldValue("endDate", formatDatetimeForDB(value,"00:00:00"));
+                console.log(value)
+                props.setFieldValue("endDate", value);
               }}
             />
             <ErrorMessage name="endDate" component="span" className="text-sm text-red-500" />

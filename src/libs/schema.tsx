@@ -8,7 +8,7 @@ export const eventSchema = Yup.object({
   .required("Title is required"),
   description: 
   Yup.string()
-  .min(200, "Title must be at least 200 characters long")
+  .min(10, "Title must be at least 10 characters long")
   .max(1000, "Title must be at most 1000 characters long")
   .required("description is required"),
   category: 
@@ -28,9 +28,9 @@ export const eventSchema = Yup.object({
   venue: 
   Yup.string()
   .required("location is required"),
-  mapURL: 
+  maps: 
   Yup.string()
-  .required("mapURL is required"),
+  .required("map URL is required"),
   type: 
   Yup.string()
   .required("type is required"),

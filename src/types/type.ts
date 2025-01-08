@@ -46,21 +46,21 @@ export interface EventInput {
     title: string;
     description: string;
     slug: string;
-    category: "Entertainment" | "seminar" | "sport" | "food" | "all";
-    date: Date;
+    category: string;
+    date: string;
     time: string;
-    location: "Bandung" | "Jakarta" | "Bogor" | "Depok" |"Tangerang" | "Bekasi";
+    location: string;
     venue: string;
     maps: string;
-    type: "Paid" | "Free";
-    thumbnail: File | string | null;
+    type: string;
+    thumbnail?: File | string | null
   }
 
   export interface TicketInput {
     price: number;
-    category: "VIP"| "Cat1" | "Cat2" | "festivalPass" | "free" ;
-    startDate: Date;
-    endDate: Date;
+    category: string ;
+    startDate: string;
+    endDate: string;
     quota: number;
     discount: boolean;
   }
@@ -70,7 +70,7 @@ export interface EventInput {
     basePrice: number,
     totalPrice: number,
     finalPrice: number,
-    status: "pending" | "paid" | "canceled",
+    status: string,
     user: IUser,
     ticket: ITicket,
     createdAt: Date,
@@ -85,5 +85,5 @@ export interface EventInput {
 
 export interface ReviewInput{
     desc: string;
-    rating: "bad" | "notBad" | "good" | "fantastic";
+    rating: string;
 }

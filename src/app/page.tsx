@@ -39,7 +39,7 @@ export default function Home() {
         <Searchbar value={value} onChange={(e) => setValue(e.target.value)} />
         <div className="sm:hiden flex">
           {/* <Sidebar /> */}
-          <div className="flex flex-col my-10 bg-neutral-200 mx-10 w-full p-8 rounded-xl">
+          <div className="flex flex-col my-10 bg-neutral-200 lg:mx-10 w-full p-8 rounded-xl">
             {events.length == 0 ?
             <div>
               <h1 className="text-3xl text-center font-semibold text-[#387874]">No Events Found</h1>
