@@ -62,7 +62,7 @@ function EventCreatePage() {
           formData.append(key, item);
         }
       }
-          const res = await fetch(`https://ate-backend.vercel.app/api/events/`, {
+          const res = await fetch(`http://localhost:8000/api/events`, {
             method: "POST",
             body: formData,
             headers: {

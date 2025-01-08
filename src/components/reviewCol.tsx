@@ -17,17 +17,17 @@ function Review({ EventId }: review) {
   const [isLoading, setIsLoading] = useState(false);
   const id = EventId;
   const onCreate = async (data: ReviewInput) => {
-    const token = localStorage.getItem("token");
-    if(!token){
-      toast.error("User not logged in");
-    }
+    // const token = localStorage.getItem("token");
+    // if(!token){
+    //   toast.error("User not logged in");
+    // }
     try {
       setIsLoading(true);
-      const res = await fetch(`https://ate-backend.vercel.app/api/review/${id}`, {
+      const res = await fetch(`http://localhost:8000/api/review/${id}`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
         },
       });
@@ -63,21 +63,21 @@ function Review({ EventId }: review) {
                   <label htmlFor="rating" className="block mb-2 text-sm w-max font-medium text-gray-900">
                     Ratings
                   </label>
-                  <Field name="Ratings" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
+                  <Field name="rating" as="select" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2">
                     <option value="">~ Ratings ~</option>
                     <option value="bad">🥱</option>
                     <option value="notBad">😐</option>
                     <option value="good">🙂</option>
                     <option value="fantastic">🤩</option>
                   </Field>
-                  <ErrorMessage name="category" component="span" className="text-sm text-red-500" />
+                  <ErrorMessage name="rating" component="span" className="text-sm text-red-500" />
                 </div>
                 <div>
                   <label htmlFor="desc" className="block mb-2 text-sm w-max font-medium text-gray-900">
                     Review
                   </label>
                   <Field
-                    name="Review"
+                    name="desc"
                     type="text"
                     className="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block p-2"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

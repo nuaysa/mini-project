@@ -97,7 +97,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   const handleTransaction = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`https://ate-backend.vercel.app/api/transaction/${params.id}`, {
+      const res = await fetch(`http://localhost:8000/api/transaction/${params.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

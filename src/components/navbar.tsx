@@ -11,6 +11,8 @@ import {
     NavbarLink,
     NavbarToggle,
   } from "flowbite-react";
+import LoginButton from "./button";
+import Link from "next/link";
   
   export function Compnavbar() {
     return (
@@ -28,11 +30,10 @@ import {
             }
           >
             <DropdownHeader>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+              <LoginButton/>
             </DropdownHeader>
-            <DropdownItem>Dashboard</DropdownItem>
-            <DropdownItem>Lists</DropdownItem>
+            <DropdownItem><Link href="/Login/users">Login</Link></DropdownItem>
+            <DropdownItem><Link href="/Register/users">Register</Link></DropdownItem>
             <DropdownDivider />
             <DropdownItem>Sign out</DropdownItem>
           </Dropdown>

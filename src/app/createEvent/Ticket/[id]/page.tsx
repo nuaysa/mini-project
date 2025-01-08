@@ -36,7 +36,7 @@ export default function CreateTicket({ params }: { params: { id: number } }) {
     }
     try {
         setIsLoading(true);
-        const res = await fetch(`https://ate-backend.vercel.app/api/events/ticket/${params.id}`, {
+        const res = await fetch(`http://localhost:8000/api/events/ticket/${params.id}`, {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
