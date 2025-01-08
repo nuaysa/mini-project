@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 // const base_url = process.env.BASE_URL_BE;
 
 const RegisterSchema = Yup.object().shape({
-  organisationName: Yup.string().required("Username is required"),
+  organizationName: Yup.string().required("Username is required"),
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
@@ -25,7 +25,7 @@ const RegisterSchema = Yup.object().shape({
 });
 
 interface FormValues {
-  organisationName: string;
+  organizationName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -35,7 +35,7 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const initialValue: FormValues = {
-    organisationName: "",
+    organizationName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -95,7 +95,7 @@ export default function SignUpPage() {
               <Form className="flex flex-col gap-5">
                 <Input
                   formik={props}
-                  name="organisationName"
+                  name="organizationName"
                   label="organisation Name*"
                 />
                 <Input

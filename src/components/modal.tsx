@@ -8,7 +8,7 @@ interface ICompmodal {
   handleTransaction: () => void;
 }
 export default function Compmodal({ handleTransaction }: ICompmodal) {
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
 
     return(
         <div>

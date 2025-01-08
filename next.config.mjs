@@ -7,6 +7,7 @@ const nextConfig = {
         {hostname : "akcdn.detik.net.id"},
         {hostname : "res.cloudinary.com"},
         {hostname : "c8.alamy.com"},
+        {hostname : "as2.ftcdn.net"},
     ]
 }};
 
