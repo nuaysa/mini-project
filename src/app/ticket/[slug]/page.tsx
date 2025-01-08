@@ -3,7 +3,7 @@ import Description from "@/components/tickets";
 import { formatDate } from "@/helpers/dateFormat";
 import { formatPrice } from "@/helpers/priceFormat";
 import formatToWIB from "@/helpers/timeFormat";
-import { getDetail, getEvents, getEventSlug } from "@/libs/events";
+import { getEvents, getEventSlug } from "@/libs/events";
 import { IEvents } from "@/types/type";
 import Image from "next/image";
 import { FaCalendarAlt, FaRegClock } from "react-icons/fa";
@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function Tickets({ params }: { params: { slug: string } }) {
   const event: IEvents = await getEventSlug(params.slug);
-  const detail = await getDetail()
   
   return (
     <div className="flex flex-col justify-center">
@@ -108,7 +107,7 @@ export default async function Tickets({ params }: { params: { slug: string } }) 
             </div>
           </div>
 
-          <div className={`flex flex-col gap-5 w-2/3 ${new Date(event.date).getTime() > new Date().getTime () || !detail ? "hidden" : "flex"}`}>
+          <div className={`flex flex-col gap-5 w-2/3 ${new Date(event.date).getTime() > new Date().getTime () ? "hidden" : "flex"}`}>
     <Review EventId={event.id}/>
           </div>
     </div>
