@@ -41,7 +41,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
     try {
       
       const res = await fetch("https://ate-backend.vercel.app/api/coupon/points", {  
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
     }})
@@ -57,7 +57,7 @@ export default function Transaction({ params }: { params: { slug: string; id: nu
   const getVoucher = async () => {
     try {
       const res = await fetch("https://ate-backend.vercel.app/api/coupon/voucher", {  
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
     }})
